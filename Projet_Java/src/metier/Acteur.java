@@ -1,5 +1,5 @@
 package metier;
-// test ilias
+
 import java.util.ArrayList;
 
 public class Acteur {
@@ -13,10 +13,6 @@ public class Acteur {
         this.prenom = prenom;
         this.films = new ArrayList<Film>();
     }
-
-    // Methods from the class diagram
-    public void ajouter_film(Film film) {}
-    public void supprimer_film(Film film) {}
 
     // Getters and setters
     public String getNom() {
@@ -41,5 +37,29 @@ public class Acteur {
 
     public void setFilms(ArrayList<Film> films) {
         this.films = new ArrayList<Film>(films);
+    }
+    
+    public void ajouter_film(Film film) {
+    	this.films.add(film);
+    }
+    public void supprimer_film(Film film) {
+    	this.films.remove(film);
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Acteur: ").append(this.prenom).append(" ").append(this.nom).append("\n");
+        sb.append("Films:\n");
+        
+        if (films.isEmpty()) {
+            sb.append("Aucun film répertorié.\n");
+        } else {
+            for (Film film : films) {
+                sb.append(" - ").append(film.getTitre()).append(" (").append(film.getAnnee_prod()).append(")\n");
+            }
+        }
+
+        return sb.toString();
     }
 }
