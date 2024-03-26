@@ -1,6 +1,5 @@
 package metier;
 
-
 import java.util.Date;
 
 public class Commentaire {
@@ -44,13 +43,21 @@ public class Commentaire {
         this.utilisateur = utilisateur;
     }
 
-	public Film getFilm() {
-		return film;
-	}
+    public Film getFilm() {
+        return film;
+    }
 
-	public void setFilm(Film film) {
-		this.film = film;
-	}
-    
-    
+    public void setFilm(Film film) {
+        this.film = film;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Commentaire sur le film \"").append(film.getTitre()).append("\" par ");
+        sb.append(utilisateur != null ? utilisateur.getPrenom() + " " + utilisateur.getNom() : "Anonyme");
+        sb.append(" le ").append(date).append(":\n");
+        sb.append(texte);
+        return sb.toString();
+    }
 }
