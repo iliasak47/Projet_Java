@@ -11,7 +11,7 @@ public class Abonne extends Utilisateur {
         this.taux_reduction = taux_reduction;
     }
 
-    // Getters and Setters
+    // Getter and Setter
     public float getTaux_reduction() {
         return taux_reduction;
     }
