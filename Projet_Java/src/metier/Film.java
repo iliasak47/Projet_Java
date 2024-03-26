@@ -1,6 +1,5 @@
 package metier;
 
-
 import java.util.ArrayList;
 
 public class Film {
@@ -158,6 +157,8 @@ public class Film {
         }
     }
 
+
+
     public void afficher_com_filtres(String string) {
         // Implémentation pour afficher les commentaires filtrés
     }
@@ -183,5 +184,34 @@ public class Film {
         }
         this.note_moy = notes.isEmpty() ? 0.0f : somme / notes.size();
     }
+    
+    // afficher note moyenne
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Film: ").append(this.titre).append("\n");
+        sb.append("Code: ").append(this.code).append("\n");
+        sb.append("Thème: ").append(this.theme).append("\n");
+        sb.append("Année de production: ").append(this.annee_prod).append("\n");
+        sb.append("Description: ").append(this.description).append("\n");
+        sb.append("Prix: ").append(this.prix).append("€\n");
+        sb.append("Note moyenne: ").append(this.note_moy).append("\n");
+        sb.append("Producteur: ").append(this.producteur != null ? this.producteur.getNom() : "Non spécifié").append("\n");
+        sb.append("Commentaires actifs: ").append(this.com_actif ? "Oui" : "Non").append("\n");
+        if (!acteurs.isEmpty()) {
+            sb.append("Acteurs:\n");
+            for (Acteur acteur : acteurs) {
+                sb.append(" - ").append(acteur.getNom()).append("\n");
+            }
+        } else {
+            sb.append("Pas d'acteurs.\n");
+        }
+        sb.append("Nombre de commentaires: ").append(this.commentaires.size()).append("\n");
+        sb.append("Nombre de notes: ").append(this.notes.size()).append("\n");
+        return sb.toString();
+    }
+
+
 }
        
