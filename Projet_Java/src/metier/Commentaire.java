@@ -1,4 +1,4 @@
-package packag;
+package metier;
 
 
 import java.util.Date;

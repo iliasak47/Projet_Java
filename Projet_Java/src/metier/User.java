@@ -1,4 +1,4 @@
-package packag;
+package metier;
 
 public class User {
     protected String nom;

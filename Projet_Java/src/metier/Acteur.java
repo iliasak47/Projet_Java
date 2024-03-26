@@ -1,4 +1,4 @@
-package packag;
+package metier;
 // test ilias
 import java.util.ArrayList;
 
