@@ -1,6 +1,5 @@
 package metier;
 
-
 public class Note {
     private float note;
     private Film film; 
@@ -13,7 +12,7 @@ public class Note {
         this.utilisateur = utilisateur;
     }
 
-    // Getter and setter for note
+    // Getter and setter 
     public float getNote() {
         return note;
     }
@@ -22,7 +21,6 @@ public class Note {
         this.note = note;
     }
 
-    // Getter and setter for film
     public Film getFilm() {
         return film;
     }
@@ -31,12 +29,20 @@ public class Note {
         this.film = film;
     }
 
-    // Getter and setter for utilisateur
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+    }
+    
+    @Override
+    public String toString() {
+        String filmTitle = film != null ? film.getTitre() : "Non spécifié";
+        String userName = utilisateur != null ? utilisateur.getPrenom() + " " + utilisateur.getNom() : "Anonyme";
+        return "Note: " + note + "/10\n" +
+               "Film: " + filmTitle + "\n" +
+               "Donnée par: " + userName + "\n";
     }
 }
