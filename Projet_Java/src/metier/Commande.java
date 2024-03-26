@@ -1,6 +1,5 @@
 package metier;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -66,23 +65,27 @@ public class Commande {
         this.films.remove(film);
     }
     
-    public void afficher_commande() {
-        System.out.println("Commande effectuée le : " + this.date);
-        System.out.println("Utilisateur : " + this.utilisateur.getPrenom() + " " + this.utilisateur.getNom());
-        System.out.println("-------------------------------------------------");
-        System.out.println("Liste des films :");
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Commande effectuée le : ").append(this.date).append("\n");
+        sb.append("Utilisateur : ").append(this.utilisateur.getPrenom()).append(" ").append(this.utilisateur.getNom()).append("\n");
+        sb.append("-------------------------------------------------\n");
+        sb.append("Liste des films :\n");
         
         if (this.films.isEmpty()) {
-            System.out.println("Aucun film dans cette commande.");
+            sb.append("Aucun film dans cette commande.\n");
         } else {
             for (Film film : this.films) {
-                System.out.println("Film : " + film.getTitre() + " - Prix : " + film.getPrix() + "€");
+                sb.append("Film : ").append(film.getTitre()).append(" - Prix : ").append(film.getPrix()).append("€\n");
             }
         }
 
-        System.out.println("-------------------------------------------------");
-        System.out.println("Montant total : " + this.montant + "€");
+        sb.append("-------------------------------------------------\n");
+        sb.append("Montant total : ").append(this.montant).append("€\n");
+        return sb.toString();
     }
+
 
 
 }
