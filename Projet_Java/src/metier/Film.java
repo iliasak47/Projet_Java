@@ -176,16 +176,17 @@ public class Film {
         calculer_note_moy();
     }
 
-    // Méthode pour calculer la note moyenne basée sur les notes
+    // Méthode pour calculer la note moyenne basée sur les notes et afficher cette note moyenne
     public void calculer_note_moy() {
         float somme = 0;
         for (Note note : this.notes) {
             somme += note.getNote();
         }
         this.note_moy = notes.isEmpty() ? 0.0f : somme / notes.size();
+        // Afficher la note moyenne
+        System.out.println("La note moyenne pour le film " + this.titre + " est de : " + this.note_moy + "/10");
     }
-    
-    // afficher note moyenne
+
     
     @Override
     public String toString() {
