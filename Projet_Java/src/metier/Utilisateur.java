@@ -69,8 +69,8 @@ public class Utilisateur extends User {
         System.out.println("Le commentaire a été mis à jour.");
     }
     
-    public void ajouter_com(String texte, Film film, Date date) { // à revoir
-    	Commentaire c = new Commentaire(texte, date, this, film);
+    public void commenter(String texte, Film film) { // à revoir
+    	Commentaire c = new Commentaire(texte, new Date(), this, film);
     	this.commentaires.add(c);
     	film.ajouter_com(c);
     }
@@ -78,6 +78,10 @@ public class Utilisateur extends User {
     public void afficher_com(Film film) {
     	film.afficher_com();
     } 
+    
+    public void ajouter_com(Commentaire commentaire) {
+    	this.commentaires.add(commentaire);
+    }
     
     public void supprimer_com(Commentaire commentaire, Film film) {
     	this.commentaires.remove(commentaire);

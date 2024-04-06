@@ -15,6 +15,7 @@ public class Film {
     private ArrayList<Acteur> acteurs = new ArrayList<Acteur>();
     private ArrayList<Note> notes = new ArrayList<Note>();
     private Producteur producteur; 
+    private Type_Film type;
 
     // Constructor
     public Film(String code, String titre, String theme, int annee_prod, boolean com_actif, String description, float prix, Producteur producteur) {
