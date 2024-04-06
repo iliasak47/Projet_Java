@@ -7,14 +7,14 @@ public class Commande {
     private Date date;
     private float montant;
     private Utilisateur utilisateur; 
-    private ArrayList<Film> films; 
+    private ArrayList<Film> films  = new ArrayList<Film>();
 
     // Constructor
-    public Commande(Date date, float montant, Utilisateur utilisateur) {
+    public Commande(Date date, Utilisateur utilisateur) {
         this.date = date;
         this.montant = 0.0f;
         this.utilisateur = utilisateur;
-        this.films = new ArrayList<Film>(); 
+        // this.films = new ArrayList<Film>(); 
         for(Film f : films) {
         	this.montant += f.getPrix();
         }

@@ -7,7 +7,7 @@ public class Abonne extends Utilisateur {
 
     // Constructor
     public Abonne(String nom, String prenom, String mail, String adresse, Compte compte, Date date_naissance, String phrase_secrete, boolean abonne, float taux_reduction) {
-        super(nom, prenom, mail, adresse, compte, date_naissance, phrase_secrete, abonne);
+        super(nom, prenom, mail, adresse, compte, date_naissance, phrase_secrete);
         this.taux_reduction = taux_reduction;
     }
 
