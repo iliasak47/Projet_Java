@@ -11,9 +11,9 @@ public class Film {
     private String description;
     private float prix;
     private float note_moy;
-    private ArrayList<Commentaire> commentaires;
-    private ArrayList<Acteur> acteurs;
-    private ArrayList<Note> notes;
+    private ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
+    private ArrayList<Acteur> acteurs = new ArrayList<Acteur>();
+    private ArrayList<Note> notes = new ArrayList<Note>();
     private Producteur producteur; 
 
     // Constructor
@@ -24,12 +24,10 @@ public class Film {
         this.annee_prod = annee_prod;
         this.com_actif = com_actif;
         this.description = description;
-        this.prix = prix;
-        this.commentaires = new ArrayList<Commentaire>(); // Initialisation précise
-        this.acteurs = new ArrayList<Acteur>(); // Initialisation précise
-        this.notes = new ArrayList<Note>(); // Initialisation précise
-        this.producteur = producteur; // Initialisation de l'attribut producteur
-        this.note_moy = 0.0f; // Initialisation de la note moyenne à 0
+        this.prix = prix; 
+        this.producteur = producteur; 
+        producteur.ajouter_film(this);
+        this.note_moy = 0.0f; 
     }
 
     // Getters and Setters
@@ -91,25 +89,6 @@ public class Film {
 
     public float getNote_moy() {
         return note_moy;
-    }
-
-    // Note moyenne ne devrait pas avoir de setter, car elle est calculée
-
-    public ArrayList<Commentaire> getCommentaires() {
-        return new ArrayList<>(commentaires);
-    }
-
-    public ArrayList<Acteur> getActeurs() {
-        return new ArrayList<>(acteurs);
-    }
-
-    public ArrayList<Note> getNotes() {
-        return new ArrayList<>(notes);
-    }
-
-    public void setNotes(ArrayList<Note> notes) {
-        this.notes = new ArrayList<>(notes);
-        calculer_note_moy();
     }
 
     public Producteur getProducteur() {

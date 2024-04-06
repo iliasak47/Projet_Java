@@ -14,7 +14,6 @@ public class Commande {
         this.date = date;
         this.montant = 0.0f;
         this.utilisateur = utilisateur;
-        // this.films = new ArrayList<Film>(); 
         for(Film f : films) {
         	this.montant += f.getPrix();
         }
@@ -45,15 +44,6 @@ public class Commande {
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
-    }
-
-    // Getter and setter for films
-    public ArrayList<Film> getFilms() {
-        return new ArrayList<>(films); // Retourner une copie pour l'encapsulation
-    }
-
-    public void setFilms(ArrayList<Film> films) {
-        this.films = new ArrayList<>(films); // Assigner une nouvelle liste basée sur la liste fournie
     }
 
     // Méthodes pour ajouter et supprimer des films

@@ -5,10 +5,10 @@ import java.util.Scanner;
 import java.util.Date;
 
 public class Utilisateur extends User {
-    private ArrayList<Film> panier;
-    private ArrayList<Commentaire> commentaires;
-    private ArrayList<Commande> achats;
-    private ArrayList<Note> notes;
+    private ArrayList<Film> panier = new ArrayList<Film>();
+    private ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
+    private ArrayList<Commande> achats = new ArrayList<Commande>();
+    private ArrayList<Note> notes = new ArrayList<Note>();
     private Date date_naissance;
     private String phrase_secrete;
     private boolean abonne;
@@ -19,37 +19,9 @@ public class Utilisateur extends User {
         this.date_naissance = date_naissance;
         this.phrase_secrete = phrase_secrete;
         this.abonne = false;
-        this.panier = new ArrayList<Film>();
-        this.commentaires = new ArrayList<Commentaire>();
-        this.achats = new ArrayList<Commande>();
-        this.notes = new ArrayList<Note>();
     }
 
     // Getter Setter
-	public ArrayList<Film> getPanier() {
-		return panier;
-	}
-
-	public void setPanier(ArrayList<Film> panier) {
-		this.panier = panier;
-	}
-
-	public ArrayList<Commentaire> getCommentaires() {
-		return commentaires;
-	}
-
-	public void setCommentaires(ArrayList<Commentaire> commentaires) {
-		this.commentaires = commentaires;
-	}
-
-	public ArrayList<Commande> getAchats() {
-		return achats;
-	}
-
-	public void setAchats(ArrayList<Commande> achats) {
-		this.achats = achats;
-	}
-
 	public Date getDate_naissance() {
 		return date_naissance;
 	}
@@ -87,7 +59,7 @@ public class Utilisateur extends User {
     
     public void filter_com(Film film, String string) {}
     
-    public void modifier_com(Commentaire commentaire, Film film) {
+    public void modifier_com(Commentaire commentaire, Film film) { // à refaire
         Scanner scanner = new Scanner(System.in); 
         System.out.println("Saisissez le nouveau commentaire pour le film " + film.getTitre() + ":");
         String texte = scanner.nextLine(); 
@@ -97,7 +69,7 @@ public class Utilisateur extends User {
         System.out.println("Le commentaire a été mis à jour.");
     }
     
-    public void ajouter_com(String texte, Film film, Date date) {
+    public void ajouter_com(String texte, Film film, Date date) { // à revoir
     	Commentaire c = new Commentaire(texte, date, this, film);
     	this.commentaires.add(c);
     	film.ajouter_com(c);

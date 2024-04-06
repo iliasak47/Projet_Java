@@ -5,13 +5,12 @@ import java.util.ArrayList;
 public class Acteur {
     private String nom;
     private String prenom;
-    private ArrayList<Film> films;
+    private ArrayList<Film> films = new ArrayList<Film>();
 
     // Constructor
     public Acteur(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
-        this.films = new ArrayList<Film>();
     }
 
     // Getters and setters
@@ -29,14 +28,6 @@ public class Acteur {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
-    }
-
-    public ArrayList<Film> getFilms() {
-        return new ArrayList<Film>(films);
-    }
-
-    public void setFilms(ArrayList<Film> films) {
-        this.films = new ArrayList<Film>(films);
     }
     
     public void ajouter_film(Film film) {
