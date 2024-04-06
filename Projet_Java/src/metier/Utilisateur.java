@@ -13,7 +13,7 @@ public class Utilisateur extends User {
     private String phrase_secrete;
     private boolean abonne;
 
-    // Constructor
+    // Constructor Test
     public Utilisateur(String nom, String prenom, String mail, String adresse, Compte compte, Date date_naissance, String phrase_secrete) {
         super(nom, prenom, mail, adresse, compte);
         this.date_naissance = date_naissance;
