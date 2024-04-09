@@ -1,19 +1,21 @@
 package metier;
 
-public class User {
+public class Personne {
     protected String nom;
     protected String prenom;
     protected String mail;
     protected String adresse;
-    protected Compte compte;
+    private String id;
+	private String mdp;
 	
-    public User(String nom, String prenom, String mail, String adresse, Compte compte) {
+	public Personne(String nom, String prenom, String mail, String adresse, String id, String mdp) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mail = mail;
 		this.adresse = adresse;
-		this.compte = compte;
+		this.id = id;
+		this.mdp = mdp;
 	}
 
 	public String getNom() {
@@ -48,13 +50,26 @@ public class User {
 		this.adresse = adresse;
 	}
 
-	public Compte getCompte() {
-		return compte;
+	public String getId() {
+		return id;
 	}
 
-	public void setCompte(Compte compte) {
-		this.compte = compte;
+	public void setId(String id) {
+		this.id = id;
 	}
+
+	public String getMdp() {
+		return mdp;
+	}
+
+	public void setMdp(String mdp) {
+		this.mdp = mdp;
+	}
+	
+	
+    
+
+	
     
     
 }

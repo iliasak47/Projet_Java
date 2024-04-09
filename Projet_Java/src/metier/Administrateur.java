@@ -1,31 +1,38 @@
 package metier;
 
-public class Administrateur extends User {
-    private String id; 
-
+public class Administrateur extends Personne {
+	private Application application;
+	
     // Constructeur
-    public Administrateur(String nom, String prenom, String mail, String adresse, Compte compte, String id) {
-        super(nom, prenom, mail, adresse, compte); 
-        this.id = id;
+    public Administrateur(String nom, String prenom, String mail, String adresse, String id, String mdp, Application application) {
+        super(nom, prenom, mail, adresse, id, mdp); 
+        this.application = application;
     }
 
-    // Getters et Setters
-    public String getId() {
-        return id;
+    public Application getApplication() {
+		return application;
+	}
+
+	public void setApplication(Application application) {
+		this.application = application;
+	}
+
+	// Methodes
+    public void ajouterFilm(Film film) {
+    	application.ajouterFilm(film);
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void supprimerFilm(Film film) {
+    	application.supprimerFilm(film);
     }
 
-    // Methodes
-    public void ajouterFilm(Film film) {    }
+    public void ajouterUtilisateur(Utilisateur utilisateur) {
+    	application.ajouterUtilisateur(utilisateur);
+    }
 
-    public void supprimerFilm(Film film) {    }
-
-    public void ajouterUtilisateur(Utilisateur utilisateur) {    }
-
-    public void supprimerUtilisateur(Utilisateur utilisateur) {    }
+    public void supprimerUtilisateur(Utilisateur utilisateur) {
+    	application.supprimerUtilisateur(utilisateur);
+    }
 
 }
 

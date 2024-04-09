@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Film {
     private String code;
     private String titre;
-    private String theme;
     private int annee_prod;
     private boolean com_actif;
     private String description;
@@ -18,10 +17,9 @@ public class Film {
     private Type_Film type;
 
     // Constructor
-    public Film(String code, String titre, String theme, int annee_prod, boolean com_actif, String description, float prix, Producteur producteur) {
+    public Film(String code, String titre, int annee_prod, boolean com_actif, String description, float prix, Producteur producteur, Type_Film type) {
         this.code = code;
         this.titre = titre;
-        this.theme = theme;
         this.annee_prod = annee_prod;
         this.com_actif = com_actif;
         this.description = description;
@@ -29,6 +27,7 @@ public class Film {
         this.producteur = producteur; 
         producteur.ajouter_film(this);
         this.note_moy = 0.0f; 
+        this.type = type;
     }
 
     // Getters and Setters
@@ -48,15 +47,15 @@ public class Film {
         this.titre = titre;
     }
 
-    public String getTheme() {
-        return theme;
-    }
+    public Type_Film getType() {
+		return type;
+	}
 
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
+	public void setType(Type_Film type) {
+		this.type = type;
+	}
 
-    public int getAnnee_prod() {
+	public int getAnnee_prod() {
         return annee_prod;
     }
 
@@ -173,11 +172,11 @@ public class Film {
         StringBuilder sb = new StringBuilder();
         sb.append("Film: ").append(this.titre).append("\n");
         sb.append("Code: ").append(this.code).append("\n");
-        sb.append("Thème: ").append(this.theme).append("\n");
+        sb.append("Thème: ").append(this.type).append("\n");
         sb.append("Année de production: ").append(this.annee_prod).append("\n");
         sb.append("Description: ").append(this.description).append("\n");
         sb.append("Prix: ").append(this.prix).append("€\n");
-        sb.append("Note moyenne: ").append(this.note_moy).append("\n");
+        sb.append("Note moyenne: ").append(this.note_moy).append("/10").append("\n");
         sb.append("Producteur: ").append(this.producteur != null ? this.producteur.getNom() : "Non spécifié").append("\n");
         sb.append("Commentaires actifs: ").append(this.com_actif ? "Oui" : "Non").append("\n");
         if (!acteurs.isEmpty()) {

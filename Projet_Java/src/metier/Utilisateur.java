@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Date;
 
-public class Utilisateur extends User {
+public class Utilisateur extends Personne {
     private ArrayList<Film> panier = new ArrayList<Film>();
     private ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
     private ArrayList<Commande> achats = new ArrayList<Commande>();
@@ -14,8 +14,8 @@ public class Utilisateur extends User {
     private boolean abonne;
 
     // Constructor Test
-    public Utilisateur(String nom, String prenom, String mail, String adresse, Compte compte, Date date_naissance, String phrase_secrete) {
-        super(nom, prenom, mail, adresse, compte);
+    public Utilisateur(String nom, String prenom, String mail, String adresse, String id, String mdp, Date date_naissance, String phrase_secrete) {
+        super(nom, prenom, mail, adresse, id, mdp);
         this.date_naissance = date_naissance;
         this.phrase_secrete = phrase_secrete;
         this.abonne = false;
@@ -69,10 +69,11 @@ public class Utilisateur extends User {
         System.out.println("Le commentaire a été mis à jour.");
     }
     
-    public void commenter(String texte, Film film) { // à revoir
+    public Commentaire commenter(String texte, Film film) { 
     	Commentaire c = new Commentaire(texte, new Date(), this, film);
     	this.commentaires.add(c);
     	film.ajouter_com(c);
+    	return c;
     }
     
     public void afficher_com(Film film) {
@@ -83,9 +84,8 @@ public class Utilisateur extends User {
     	this.commentaires.add(commentaire);
     }
     
-    public void supprimer_com(Commentaire commentaire, Film film) {
+    public void supprimer_com(Commentaire commentaire) {
     	this.commentaires.remove(commentaire);
-    	film.supprimer_com(commentaire);
     }
     
     public void ajouter_film_panier(Film film) {
