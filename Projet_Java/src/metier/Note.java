@@ -5,7 +5,7 @@ public class Note {
     private Film film; 
     private Utilisateur utilisateur; 
 
-    // Constructor
+    // Constructeur
     public Note(float note, Film film, Utilisateur utilisateur) {
         this.note = note;
         this.film = film;

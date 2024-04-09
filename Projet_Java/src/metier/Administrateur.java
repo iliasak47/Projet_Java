@@ -3,7 +3,7 @@ package metier;
 public class Administrateur extends Personne {
 	private Application application;
 	
-    // Constructeur
+    // Constructor
     public Administrateur(String nom, String prenom, String mail, String adresse, String id, String mdp, Application application) {
         super(nom, prenom, mail, adresse, id, mdp); 
         this.application = application;

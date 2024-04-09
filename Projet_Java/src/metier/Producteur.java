@@ -6,7 +6,7 @@ public class Producteur {
     private String nom;
     private String prenom;
     private ArrayList<Film> films = new ArrayList<Film>();
-
+ 
     // Constructor
     public Producteur(String nom, String prenom) {
         this.nom = nom;

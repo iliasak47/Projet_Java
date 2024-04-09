@@ -8,7 +8,7 @@ public class Commentaire {
     private Utilisateur utilisateur; 
     private Film film;
 
-    // Constructor
+    // Constructeur
     public Commentaire(String texte, Date date, Utilisateur utilisateur, Film film) {
         this.texte = texte;
         this.date = date;

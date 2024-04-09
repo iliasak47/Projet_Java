@@ -16,7 +16,7 @@ public class Film {
     private Producteur producteur; 
     private Type_Film type;
 
-    // Constructor
+    // Constructeurr
     public Film(String code, String titre, int annee_prod, boolean com_actif, String description, float prix, Producteur producteur, Type_Film type) {
         this.code = code;
         this.titre = titre;

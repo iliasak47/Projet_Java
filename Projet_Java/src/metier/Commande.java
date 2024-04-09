@@ -9,7 +9,7 @@ public class Commande {
     private Utilisateur utilisateur; 
     private ArrayList<Film> films  = new ArrayList<Film>();
 
-    // Constructor
+    // Constructeur 
     public Commande(Date date, Utilisateur utilisateur) {
         this.date = date;
         this.montant = 0.0f;

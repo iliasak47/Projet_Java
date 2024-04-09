@@ -7,7 +7,7 @@ public class Acteur {
     private String prenom;
     private ArrayList<Film> films = new ArrayList<Film>();
 
-    // Constructor
+    // Constructeur
     public Acteur(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;

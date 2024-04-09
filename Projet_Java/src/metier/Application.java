@@ -7,7 +7,7 @@ public class Application {
     private ArrayList<Film> films = new ArrayList<Film>();
 
     
-    // M�thodes pour g�rer les utilisateurs et les films
+    // Methodes pour g�rer les utilisateurs et les films
     public void ajouterUtilisateur(Utilisateur utilisateur) {
         this.utilisateurs.add(utilisateur);
     }

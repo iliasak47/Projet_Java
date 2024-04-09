@@ -12,7 +12,7 @@ public class Utilisateur extends Personne {
     private Date date_naissance;
     private String phrase_secrete;
     private boolean abonne;
-
+ 
     // Constructor Test
     public Utilisateur(String nom, String prenom, String mail, String adresse, String id, String mdp, Date date_naissance, String phrase_secrete) {
         super(nom, prenom, mail, adresse, id, mdp);
