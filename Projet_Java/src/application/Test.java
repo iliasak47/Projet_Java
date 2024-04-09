@@ -27,7 +27,7 @@ public class Test {
         film.afficher_com();
 
         // Modification d'un commentaire
-        System.out.println("\nModification d'un commentaire :");
+        System.out.println("\nModification d'un commentaire : ");
         utilisateur1.modifier_com(commentaire1, film);
 
         // Affichage des commentaires après modification
