@@ -19,7 +19,7 @@ public class Test {
 
         // Ajout de commentaires au film
         //Commentaire commentaire1 = new Commentaire("Un film incroyable avec beaucoup de rebondissements !", new Date(), utilisateur1, film);
-        String texte = "Titanic";
+        String texte = "Commentaire de test";
         utilisateur1.ajouter_com(texte, film);
         
         // Affichage des commentaires avant modification
