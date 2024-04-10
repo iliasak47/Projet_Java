@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Application {
     private ArrayList<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
     private ArrayList<Film> films = new ArrayList<Film>();
-
+   
+    
     
     // Methodes pour g�rer les utilisateurs et les films
     public void ajouterUtilisateur(Utilisateur utilisateur) {
@@ -26,3 +27,6 @@ public class Application {
 
 }
 
+
+// IL FAUT SUPPRIMER CETTE CLASSE (à voir équipe)
+// LA CLASSE APPLICATION DOIT ETRE DANS LE MAIN

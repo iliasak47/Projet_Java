@@ -5,7 +5,7 @@ public class Personne {
     protected String prenom;
     protected String mail;
     protected String adresse;
-    private String id;
+    protected String id; // je change id en protected car en private je ne peux pas l'utiliser dans utilisateur
 	private String mdp;
 	
 	

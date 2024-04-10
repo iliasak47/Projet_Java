@@ -59,7 +59,7 @@ public class Utilisateur extends Personne {
     
     public void filter_com(Film film, String string) {}
     
-    public void modifier_com(Commentaire commentaire, Film film) { // à refaire
+    public void modifier_com(Commentaire commentaire, Film film) { 
         Scanner scanner = new Scanner(System.in); 
         System.out.println("Saisissez le nouveau commentaire pour le film " + film.getTitre() + ":");
         String texte = scanner.nextLine(); 
@@ -124,5 +124,19 @@ public class Utilisateur extends Personne {
     public void afficher_achat() {}
     public void afficher_achat_filtres(String string) {}
     public void ajouter_note(Note note, Film film) {}
+    
+    
+
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nom: ").append(this.nom).append("\n");
+        sb.append("Prenom: ").append(this.prenom).append("\n");
+        sb.append("Mail : ").append(this.mail).append("\n");
+        sb.append("Date de naissance : ").append(this.date_naissance).append("\n");
+        sb.append("Id : ").append(this.id).append("\n");
+        return sb.toString();
+    }
     
 }
