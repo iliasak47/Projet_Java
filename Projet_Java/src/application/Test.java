@@ -98,7 +98,9 @@ public class Test {
         film1.afficher_com();
         
         // Modifier un commentaire 
-        utilisateur1.modifier_com(commentaire1, film1);
+        // utilisateur1.modifier_com(commentaire1, film1);
+        utilisateur1.modifierCommentaire(films);
+        
         
         // Affichage des commentaires avant modification
         System.out.println("\nAffichage des commentaires après modification :");

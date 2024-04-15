@@ -192,6 +192,12 @@ public class Film {
         return sb.toString();
     }
 
+	public ArrayList<Commentaire> getCommentaires() {
+		return commentaires;
+	}
+
+
+
 
 }
        
