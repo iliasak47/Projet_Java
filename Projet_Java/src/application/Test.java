@@ -98,8 +98,7 @@ public class Test {
         film1.afficher_com();
         
         // Modifier un commentaire 
-        // utilisateur1.modifier_com(commentaire1, film1);
-        utilisateur1.modifierCommentaire(films);
+        utilisateur1.modifier_com(commentaire1, film1);
         
         
         // Affichage des commentaires avant modification
