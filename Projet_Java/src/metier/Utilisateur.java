@@ -118,13 +118,67 @@ public class Utilisateur extends Personne {
     
  
     
-    public void choisir_film_achat() {} // ajouter un film au panier ?
+    
+    // creer un objet
+    public void choisir_film_achat() {
+        if (panier.isEmpty()) {
+            System.out.println("Votre panier est vide.");
+            return;
+        }
+ 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Liste des films dans votre panier :");
+        int index = 1;
+        for (Film film : panier) {
+            System.out.println(index++ + ". " + film.getTitre() + " - " + film.getPrix() + "€");
+        }
+ 
+        ArrayList<Film> filmsAchetes = new ArrayList<>();
+        String input;
+        System.out.println("Entrez les numéros des films que vous souhaitez acheter (séparés par des espaces) :");
+        input = scanner.nextLine();
+        String[] choixFilms = input.split(" ");
+ 
+        for (String choix : choixFilms) {
+            int filmIndex = Integer.parseInt(choix) - 1;
+            if (filmIndex >= 0 && filmIndex < panier.size()) {
+                filmsAchetes.add(panier.get(filmIndex));
+            } else {
+                System.out.println("Numéro invalide : " + (filmIndex + 1));
+            }
+        }
+ 
+        if (filmsAchetes.isEmpty()) {
+            System.out.println("Aucun film valide sélectionné.");
+            return;
+        }
+ 
+        // Création de la commande
+        Commande nouvelleCommande = new Commande(new Date(), this); // date et montant seront mis à jour
+        for (Film film : filmsAchetes) {
+            nouvelleCommande.ajouter_Film(film);
+        }
+ 
+        // Calcul du montant total de la commande
+        float total = 0;
+        for (Film film : filmsAchetes) {
+            total += film.getPrix();
+        }
+        nouvelleCommande.setMontant(total);
+ 
+        // Ajout de la commande aux achats
+        achats.add(nouvelleCommande);
+        System.out.println("Commande créée avec succès. Montant total : " + total + "€");
+    }
+
     public void payer_achat() {} // acheter ce qu'il y a dans le panier et donc créer un objet commande?
     public void consulter_historique_achat() {} // consulter les objets commandes
     public void filter_historique_achat(String string) {}
     public void ajouter_achat(Commande c) {} 
     public void supprimer_achat(Commande c) {}
-    public void afficher_achat() {}
+    public void afficher_achat() {
+    	
+    }
     public void afficher_achat_filtres(String string) {}
     public void ajouter_note(Note note, Film film) {}
     
