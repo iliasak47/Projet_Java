@@ -174,7 +174,6 @@ public class Utilisateur extends Personne {
     }
 
     public void payer_achat() {} // acheter ce qu'il y a dans le panier et donc créer un objet commande?
-    public void consulter_historique_achat() {} // consulter les objets commandes
     public void filter_historique_achat(String string) {}
     
     public void ajouter_achat(Commande c) {
@@ -184,8 +183,8 @@ public class Utilisateur extends Personne {
     	this.achats.remove(c);
     }
     
-    public void afficher_achat() {
-    	System.out.println("Liste des achats pour " + this.prenom + " " + this.nom + " :");
+    public void consulter_historique_achats() {
+    	System.out.println("Historique des achats pour " + this.prenom + " " + this.nom + " :");
     	for (Commande c : this.achats) {
     		System.out.println(c + "\n");
     	}
