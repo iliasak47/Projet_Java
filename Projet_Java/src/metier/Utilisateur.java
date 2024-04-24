@@ -2,6 +2,8 @@ package metier;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 public class Utilisateur extends Personne {
@@ -98,21 +100,21 @@ public class Utilisateur extends Personne {
     
     public void s_abonner() {
     	if (this.abonne) {
-            System.out.println("Vous Ãªtes dÃ©jÃ  abonnÃ©");
+            System.out.println("Vous êtes déjà  abonné");
         }
    	 	else {
             setAbonne(true);
-            System.out.println("Vous Ãªtes dÃ©sormais abonnÃ©");
+            System.out.println("Vous êtes désormais abonné");
         }
     }
     
     public void se_desabonner() {
     	if (!this.abonne) {
-            System.out.println("Vous n'Ãªtes pas abonnÃ©");
+            System.out.println("Vous n'êtes pas abonné");
         }
    	 	else {
             setAbonne(false);
-            System.out.println("Vous Ãªtes dÃ©sormais dÃ©sabonnÃ©");
+            System.out.println("Vous êtes désormais désabonné");
         }
     }
     
@@ -132,7 +134,7 @@ public class Utilisateur extends Personne {
  
         ArrayList<Film> filmsAchetes = new ArrayList<>();
         String input;
-        System.out.println("Entrez les numÃ©ros des films que vous souhaitez acheter (sÃ©parÃ©s par des espaces) :");
+        System.out.println("Entrez les numéros des films que vous souhaitez acheter (séparés par des espaces) :");
         input = scanner.nextLine();
         String[] choixFilms = input.split(" ");
  
@@ -141,12 +143,12 @@ public class Utilisateur extends Personne {
             if (filmIndex >= 0 && filmIndex < panier.size()) {
                 filmsAchetes.add(panier.get(filmIndex));
             } else {
-                System.out.println("NumÃ©ro invalide : " + (filmIndex + 1));
+                System.out.println("Numero invalide : " + (filmIndex + 1));
             }
         }
  
         if (filmsAchetes.isEmpty()) {
-            System.out.println("Aucun film valide sÃ©lectionnÃ©.");
+            System.out.println("Aucun film valide selectionne.");
             return;
         }
  
@@ -165,7 +167,7 @@ public class Utilisateur extends Personne {
  
         // Ajout de la commande aux achats
         this.ajouter_achat(nouvelleCommande);
-        System.out.println("Commande crÃ©Ã©e avec succÃ¨s. Montant total : " + total + "â‚¬");
+        System.out.println("Commande creee avec succes. Montant total : " + total + "â‚¬");
         
         // Retirer les films achetÃ©s du panier 
         for (Film film : filmsAchetes) {
@@ -173,8 +175,35 @@ public class Utilisateur extends Personne {
         }
     }
 
-    public void payer_achat() {} // acheter ce qu'il y a dans le panier et donc crÃ©er un objet commande?
-    public void filter_historique_achat(String string) {}
+    
+    public void consulter_historique_achats_filtres() {
+        if (achats.isEmpty()) {
+            System.out.println("Aucun achat enregistré pour " + this.prenom + " " + this.nom);
+            return;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choisissez le mode de tri pour l'historique des achats :");
+        System.out.println("1. Date croissante");
+        System.out.println("2. Date décroissante");
+        System.out.print("Entrez votre choix (1 ou 2) : ");
+        int choix = scanner.nextInt();
+
+        // Tri des commandes selon le choix de l'utilisateur
+        if (choix == 1) {
+            Collections.sort(achats, Comparator.comparing(Commande::getDate));
+        } else if (choix == 2) {
+            Collections.sort(achats, Comparator.comparing(Commande::getDate).reversed());
+        } else {
+            System.out.println("Choix invalide. Affichage par défaut (date croissante).");
+            Collections.sort(achats, Comparator.comparing(Commande::getDate));
+        }
+
+        System.out.println("Historique des achats pour " + this.prenom + " " + this.nom + " :");
+        for (Commande c : this.achats) {
+            System.out.println(c + "\n");
+        }
+    }
     
     public void ajouter_achat(Commande c) {
     	this.achats.add(c);
@@ -189,9 +218,7 @@ public class Utilisateur extends Personne {
     		System.out.println(c + "\n");
     	}
     }
-    
-    public void afficher_achat_filtres(String string) {}
-    
+        
     public void ajouter_note(Note note) {
     	this.notes.add(note);
     }
