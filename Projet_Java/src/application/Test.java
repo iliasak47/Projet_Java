@@ -26,6 +26,8 @@ public class Test {
         // Simuler une interaction avec l'utilisateur pour tester la méthode choisir_film_achat
         System.out.println("Test de la méthode choisir_film_achat()");
         utilisateur.choisir_film_achat();
+        utilisateur.choisir_film_achat();
+        utilisateur.afficher_achat();
  
         // Puisqu'il s'agit d'une interaction de console, nous supposons ici que l'utilisateur tape des entrées valides
         // Pour des tests automatisés, envisager l'utilisation de frameworks de tests comme JUnit avec des mocks pour System.in

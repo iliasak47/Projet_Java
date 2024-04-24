@@ -1,5 +1,5 @@
 package metier;
- 
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Date;
@@ -54,7 +54,7 @@ public class Utilisateur extends Personne {
     public void noter(Film film, float note) {
     	Note n = new Note(note, film, this);
     	film.ajouter_note(n);
-    	this.notes.add(n);
+    	this.ajouter_note(n);
     }
     
     public void filter_com(Film film, String string) {}
@@ -116,9 +116,6 @@ public class Utilisateur extends Personne {
         }
     }
     
- 
-    
-    
     // creer un objet
     public void choisir_film_achat() {
         if (panier.isEmpty()) {
@@ -167,20 +164,42 @@ public class Utilisateur extends Personne {
         nouvelleCommande.setMontant(total);
  
         // Ajout de la commande aux achats
-        achats.add(nouvelleCommande);
+        this.ajouter_achat(nouvelleCommande);
         System.out.println("Commande créée avec succès. Montant total : " + total + "€");
+        
+        // Retirer les films achetés du panier 
+        for (Film film : filmsAchetes) {
+            this.supprimer_film_panier(film);
+        }
     }
 
     public void payer_achat() {} // acheter ce qu'il y a dans le panier et donc créer un objet commande?
     public void consulter_historique_achat() {} // consulter les objets commandes
     public void filter_historique_achat(String string) {}
-    public void ajouter_achat(Commande c) {} 
-    public void supprimer_achat(Commande c) {}
-    public void afficher_achat() {
-    	
+    
+    public void ajouter_achat(Commande c) {
+    	this.achats.add(c);
+    } 
+    public void supprimer_achat(Commande c) {
+    	this.achats.remove(c);
     }
+    
+    public void afficher_achat() {
+    	System.out.println("Liste des achats pour " + this.prenom + " " + this.nom + " :");
+    	for (Commande c : this.achats) {
+    		System.out.println(c + "\n");
+    	}
+    }
+    
     public void afficher_achat_filtres(String string) {}
-    public void ajouter_note(Note note, Film film) {}
+    
+    public void ajouter_note(Note note) {
+    	this.notes.add(note);
+    }
+    
+    public void supprimer_note(Note note) {
+    	this.notes.remove(note);
+    }
     
     
 
