@@ -10,7 +10,7 @@ public class Interface {
         this.scanner = new Scanner(System.in);
     }
 
-    public void authentifier() {
+    public void menu() {
         System.out.println("Bienvenue! Veuillez choisir votre type de connexion:");
         System.out.println("1. Utilisateur");
         System.out.println("2. Administrateur");
@@ -27,7 +27,7 @@ public class Interface {
                 break;
             default:
                 System.out.println("Choix invalide. Veuillez choisir 1 ou 2.");
-                authentifier(); // Récursivité pour corriger le choix
+                menu(); // Récursivité pour corriger le choix
                 break;
         }
     }

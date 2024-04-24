@@ -1,46 +1,97 @@
 package metier;
 
+import java.io.*;
+
 public class Administrateur extends Personne {
-	private Application application;
-	
-	// La classe application va contenir le main et crÃ©er un objet interface
-    // Interface va contenir les diffÃ©rents menu de notre application (la vue utilisateur ou admin par exemple)
-	// La classe Administrateur Ã  son importance car elle implique des fonctionnalitÃ©s diffÃ©rentes 
 	
     // Constructor
-    public Administrateur(String nom, String prenom, String mail, String adresse, String id, String mdp, Application application) {
+    public Administrateur(String nom, String prenom, String mail, String adresse, String id, String mdp) {
         super(nom, prenom, mail, adresse, id, mdp); 
-        this.application = application;
     }
-
-    public Application getApplication() {
-		return application;
-	}
-
-	public void setApplication(Application application) {
-		this.application = application;
-	}
 
 	// Methodes
     public void ajouterFilm(Film film) {
-    	application.ajouterFilm(film);
+        // Chemin vers le fichier films.csv dans le projet
+        String cheminFichierFilms = "Projet_Java/src/data/films.csv"; // Ajustez ce chemin si nécessaire
+        
+        try (FileWriter fw = new FileWriter(cheminFichierFilms, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+
+            // Formatage des données du film pour le CSV
+            String line = String.join(",",
+                film.getCode(),
+                film.getTitre(),
+                String.valueOf(film.getAnnee_prod()),
+                String.valueOf(film.isCom_actif()),
+                film.getDescription(),
+                String.format("%.2f", film.getPrix()),
+                film.getProducteur().getNom(),
+                film.getProducteur().getPrenom(),
+                film.getType().toString()
+            );
+
+            // Écriture dans le fichier CSV
+            out.println(line);
+            
+            System.out.println("Le film a été ajouté avec succès.");
+
+        } catch (IOException e) {
+            System.out.println("Une erreur est survenue lors de l'écriture dans le fichier.");
+            e.printStackTrace();
+        }
     }
 
     public void supprimerFilm(Film film) {
-    	application.supprimerFilm(film);
     }
 
     public void ajouterUtilisateur(Utilisateur utilisateur) {
-    	application.ajouterUtilisateur(utilisateur);
+    	String cheminFichier = "Projet_Java/src/data/utilisateurs.csv"; // Ajustez ce chemin si nécessaire
+        
+        try (FileWriter fw = new FileWriter(cheminFichier, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+
+            // Formatage des données du film pour le CSV
+            String line = String.join(",",
+                utilisateur.getNom(),
+                utilisateur.getPrenom(),
+                utilisateur.getMail(),
+                utilisateur.getAdresse(),
+                utilisateur.getId(),
+                utilisateur.getMdp(),
+                String.valueOf(utilisateur.getDate_naissance()),
+                utilisateur.getPhrase_secrete(),
+                String.valueOf(utilisateur.isAbonne())
+            );
+
+            // Écriture dans le fichier CSV
+            out.println(line);
+            
+            System.out.println("L'utilisateur a été ajouté avec succès.");
+
+        } catch (IOException e) {
+            System.out.println("Une erreur est survenue lors de l'écriture dans le fichier.");
+            e.printStackTrace();
+        }
     }
 
     public void supprimerUtilisateur(Utilisateur utilisateur) {
-    	application.supprimerUtilisateur(utilisateur);
+    	
     }
     
     public boolean sAuthentifier(String motDePasse) {
 	    return this.mdp.equals(motDePasse);
 	}
+    
+    public void activer_com(Film film) {	
+    	
+    }
+    
+    public void desactiver_com(Film film) {}
+    
+    
+
 
 }
 

@@ -69,7 +69,7 @@ public class Utilisateur extends Personne {
         commentaire.setTexte(texte);
         commentaire.setDate(new Date());
         scanner.close(); 
-        System.out.println("Le commentaire a Ã©tÃ© mis Ã  jour.");
+        System.out.println("Le commentaire a ete mis a jour.");
     }
     
     public Commentaire commenter(String texte, Film film) { 
@@ -168,7 +168,7 @@ public class Utilisateur extends Personne {
  
         // Ajout de la commande aux achats
         this.ajouter_achat(nouvelleCommande);
-        System.out.println("Commande creee avec succes. Montant total : " + total + "â‚¬");
+        System.out.println("Commande creee avec succes. Montant total : " + total + "euros");
         
         // Retirer les films achetÃ©s du panier 
         for (Film film : filmsAchetes) {
@@ -187,21 +187,33 @@ public class Utilisateur extends Personne {
         System.out.println("Choisissez le mode de tri pour l'historique des achats :");
         System.out.println("1. Date croissante");
         System.out.println("2. Date décroissante");
-        System.out.print("Entrez votre choix (1 ou 2) : ");
+        System.out.println("3. Montant croissant");
+        System.out.println("4. Montant décroissant");
+        System.out.print("Entrez votre choix (1, 2, 3 ou 4) : ");
         int choix = scanner.nextInt();
 
         // Tri des commandes selon le choix de l'utilisateur
-        if (choix == 1) {
-            Collections.sort(achats, Comparator.comparing(Commande::getDate));
-        } else if (choix == 2) {
-            Collections.sort(achats, Comparator.comparing(Commande::getDate).reversed());
-        } else {
-            System.out.println("Choix invalide. Affichage par défaut (date croissante).");
-            Collections.sort(achats, Comparator.comparing(Commande::getDate));
+        switch (choix) {
+            case 1:
+                Collections.sort(achats, Comparator.comparing(Commande::getDate));
+                break;
+            case 2:
+                Collections.sort(achats, Comparator.comparing(Commande::getDate).reversed());
+                break;
+            case 3:
+                Collections.sort(achats, Comparator.comparing(Commande::getMontant));
+                break;
+            case 4:
+                Collections.sort(achats, Comparator.comparing(Commande::getMontant).reversed());
+                break;
+            default:
+                System.out.println("Choix invalide. Affichage par défaut (date croissante).");
+                Collections.sort(achats, Comparator.comparing(Commande::getDate));
+                break;
         }
 
         System.out.println("Historique des achats pour " + this.prenom + " " + this.nom + " :");
-        for (Commande c : this.achats) {
+        for (Commande c : achats) {
             System.out.println(c + "\n");
         }
     }
