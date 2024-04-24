@@ -34,7 +34,7 @@ public class Interface {
 
     private void authentifierUtilisateur() {
         System.out.println("Connexion utilisateur:");
-        verifierIdentifiants("utilisateur.csv");
+        verifierIdentifiants("utilisateur");
     }
 
     private void authentifierAdministrateur() {
@@ -42,31 +42,37 @@ public class Interface {
         verifierIdentifiants("administrateur.csv");
     }
 
-    private void verifierIdentifiants(String fichier) {
+    private void verifierIdentifiants(String typeUtilisateur) {
+        String cheminFichier = typeUtilisateur.equals("utilisateur") ? "Projet_Java/src/data/utilisateurs.csv" : "Projet_Java/src/data/administrateurs.csv";
+
         System.out.print("Entrez votre ID: ");
         String id = scanner.nextLine();
         System.out.print("Entrez votre mot de passe: ");
         String mdp = scanner.nextLine();
 
-        try {
-            File file = new File(fichier);
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+        boolean identifiantsCorrects = false;
+        try (BufferedReader br = new BufferedReader(new FileReader(cheminFichier))) {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 String[] credentials = line.split(",");
-                if (credentials[0].equals(id) && credentials[1].equals(mdp)) {
-                    if (fichier.equals("utilisateur.csv")) {
-                        menuUtilisateur();
-                    } else {
-                        menuAdministrateur();
-                    }
-                    return;
+                if (credentials[4].equals(id) && credentials[5].equals(mdp)) {
+                    identifiantsCorrects = true;
+                    break;
                 }
             }
-            System.out.println("Identifiant ou mot de passe incorrect.");
-            reader.close();
         } catch (IOException e) {
-            System.out.println("Erreur lors de l'accès au fichier " + fichier);
+            System.out.println("Erreur lors de l'accès au fichier " + cheminFichier);
+            e.printStackTrace();
+        }
+
+        if (identifiantsCorrects) {
+            if (typeUtilisateur.equals("utilisateur")) {
+                menuUtilisateur();
+            } else {
+                menuAdministrateur();
+            }
+        } else {
+            System.out.println("Identifiant ou mot de passe incorrect.");
         }
     }
 
@@ -79,6 +85,7 @@ public class Interface {
         System.out.println("Bienvenue au menu administrateur!");
         // Implémentation à venir
     }
+
 
     
 }
