@@ -1,6 +1,6 @@
-nom,prenom,email,adresse,dateNaissance,phraseSecrete
-John,Doe,john.doe@example.com,123 Main St,2023-04-01,Phrase secrète
-Jane,Smith,jane.smith@example.com,456 Elm St,2023-04-02,Une autre phrase secrète
-Alice,Johnson,alice.johnson@example.com,789 Pine St,2023-04-03,Mot de passe
-Bob,Brown,bob.brown@example.com,1012 Oak St,2023-04-04,Secret
-Charlie,Adams,charlie.adams@example.com,1314 Maple St,2023-04-05,Clef
+nom,prenom,mail,adresse,id,mdp,date_naissance,phrase_secrete,abonne
+John,Doe,john.doe@example.com,123 Main St,userID1,password123,1990-01-01,secretPhrase,false
+Smith,Jane,jane.smith@example.com,456 Elm St,janesmith,jane123,1985-05-15,herSecret,false
+Roe,Richard,richard.roe@example.com,789 Oak St,richardroe,richard123,1990-03-22,hisSecret,false
+Lee,Linda,linda.lee@example.com,321 Pine St,lindalee,linda123,1978-07-30,theSecret,false
+Davis,Alice,alice.davis@example.com,654 Maple St,alicedavis,alice123,1992-11-10,aliceSecret,false
