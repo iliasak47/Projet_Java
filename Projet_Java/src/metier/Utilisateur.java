@@ -48,11 +48,12 @@ public class Utilisateur extends Personne {
 		this.abonne = abonne;
 	}
 	
-	
 
     // Method 
-    public void s_authentifier() {}
-    
+	public boolean sAuthentifier(String motDePasse) {
+	    return this.mdp.equals(motDePasse);
+	}
+
     public void noter(Film film, float note) {
     	Note n = new Note(note, film, this);
     	film.ajouter_note(n);
@@ -226,8 +227,6 @@ public class Utilisateur extends Personne {
     public void supprimer_note(Note note) {
     	this.notes.remove(note);
     }
-    
-    
 
     
     @Override

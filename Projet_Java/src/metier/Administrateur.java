@@ -37,6 +37,10 @@ public class Administrateur extends Personne {
     public void supprimerUtilisateur(Utilisateur utilisateur) {
     	application.supprimerUtilisateur(utilisateur);
     }
+    
+    public boolean sAuthentifier(String motDePasse) {
+	    return this.mdp.equals(motDePasse);
+	}
 
 }
 

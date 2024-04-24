@@ -11,7 +11,7 @@ import java.util.Date;
 public class Test {
     public static void main(String[] args) {
  
-    	// Création d'un producteur pour les films de test
+    	/* // Création d'un producteur pour les films de test
         Producteur producteur = new Producteur("Christopher", "Nolan");
  
         // Création de quelques films
@@ -30,6 +30,9 @@ public class Test {
         utilisateur.consulter_historique_achats_filtres();
  
         // Puisqu'il s'agit d'une interaction de console, nous supposons ici que l'utilisateur tape des entrées valides
-        // Pour des tests automatisés, envisager l'utilisation de frameworks de tests comme JUnit avec des mocks pour System.in
+        // Pour des tests automatisés, envisager l'utilisation de frameworks de tests comme JUnit avec des mocks pour System.in*/
+    	
+    	Interface i = new Interface();
+    	i.authentifier();
     }
 }
