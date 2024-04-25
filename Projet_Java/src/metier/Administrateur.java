@@ -12,13 +12,13 @@ public class Administrateur extends Personne {
 	// Methodes
     public void ajouterFilm(Film film) {
         // Chemin vers le fichier films.csv dans le projet
-        String cheminFichierFilms = "Projet_Java/src/data/films.csv"; // Ajustez ce chemin si nécessaire
+        String cheminFichierFilms = "src/data/films.csv"; // Ajustez ce chemin si nï¿½cessaire
         
         try (FileWriter fw = new FileWriter(cheminFichierFilms, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
 
-            // Formatage des données du film pour le CSV
+            // Formatage des donnï¿½es du film pour le CSV
             String line = String.join(",",
                 film.getCode(),
                 film.getTitre(),
@@ -26,63 +26,90 @@ public class Administrateur extends Personne {
                 String.valueOf(film.isCom_actif()),
                 film.getDescription(),
                 String.format("%.2f", film.getPrix()),
+                String.format("%.2f", film.getNote_moy()),
                 film.getProducteur().getNom(),
                 film.getProducteur().getPrenom(),
                 film.getType().toString()
             );
 
-            // Écriture dans le fichier CSV
+            // ï¿½criture dans le fichier CSV
             out.println(line);
             
-            System.out.println("Le film a été ajouté avec succès.");
+            System.out.println("Le film a ï¿½tï¿½ ajoutï¿½ avec succï¿½s.");
 
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de l'écriture dans le fichier.");
+            System.out.println("Une erreur est survenue lors de l'ï¿½criture dans le fichier.");
             e.printStackTrace();
         }
     }
 
     public void supprimerFilm(Film film) {
-        String cheminFichierFilms = "Projet_Java/src/data/films.csv"; // Ajustez ce chemin si nécessaire
+        String cheminFichierFilms = "src/data/films.csv";
         File inputFile = new File(cheminFichierFilms);
         File tempFile = new File(inputFile.getAbsolutePath() + ".tmp");
+
+        System.out.println("DÃ©but de la suppression du film...");
+
+        if (!inputFile.exists()) {
+            System.out.println("Le fichier n'existe pas : " + cheminFichierFilms);
+            return;
+        }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
              BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
 
             String currentLine;
+            boolean found = false;
 
             while ((currentLine = reader.readLine()) != null) {
-                // trim newline when comparing with lineToRemove
                 String trimmedLine = currentLine.trim();
                 String[] data = trimmedLine.split(",");
-                if (data[0].equals(film.getCode())) continue; // Si le code du film correspond, on ne l'écrit pas dans le fichier temporaire
+                // VÃ©rifiez que vous avez le bon nombre de colonnes dans le CSV
+                if (data.length < 2) {
+                    System.out.println("Ligne mal formatÃ©e ou incorrecte dans le fichier CSV: " + trimmedLine);
+                    continue;
+                }
+                if (data[0].equals(film.getCode())) {
+                    found = true;
+                    System.out.println("Film trouvÃ©, suppression : " + trimmedLine);
+                    continue; // Ne pas Ã©crire la ligne dans le fichier temporaire
+                }
                 writer.write(currentLine + System.getProperty("line.separator"));
             }
-            
-            boolean successful = tempFile.renameTo(inputFile);
 
-            if (successful) {
-                System.out.println("Le film a été supprimé avec succès.");
+            if (!found) {
+                System.out.println("Film avec le code " + film.getCode() + " n'a pas Ã©tÃ© trouvÃ© dans le fichier.");
+            }
+
+            // Important de fermer le flux avant de renommer le fichier
+            writer.close();
+            reader.close();
+
+            if (!tempFile.renameTo(inputFile)) {
+                System.out.println("Impossible de renommer le fichier temporaire.");
             } else {
-                System.out.println("Une erreur est survenue lors de la suppression du film.");
+                System.out.println("Le film a Ã©tÃ© supprimÃ© avec succÃ¨s.");
             }
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de l'accès au fichier.");
+            System.out.println("Une erreur est survenue lors de l'accÃ¨s ou de la modification du fichier.");
             e.printStackTrace();
         } finally {
-            tempFile.delete(); // Efface le fichier temporaire dans tous les cas
+            if (tempFile.exists()) {
+                System.out.println("Suppression du fichier temporaire.");
+                tempFile.delete(); // Supprime le fichier temporaire dans tous les cas
+            }
         }
     }
+    
 
     public void ajouterUtilisateur(Utilisateur utilisateur) {
-    	String cheminFichier = "Projet_Java/src/data/utilisateurs.csv"; // Ajustez ce chemin si nécessaire
+    	String cheminFichier = "src/data/utilisateurs.csv"; // Ajustez ce chemin si nï¿½cessaire
         
         try (FileWriter fw = new FileWriter(cheminFichier, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
 
-            // Formatage des données du film pour le CSV
+            // Formatage des donnï¿½es du film pour le CSV
             String line = String.join(",",
                 utilisateur.getNom(),
                 utilisateur.getPrenom(),
@@ -95,20 +122,71 @@ public class Administrateur extends Personne {
                 String.valueOf(utilisateur.isAbonne())
             );
 
-            // Écriture dans le fichier CSV
+            // ï¿½criture dans le fichier CSV
             out.println(line);
             
-            System.out.println("L'utilisateur a été ajouté avec succès.");
+            System.out.println("L'utilisateur a ï¿½tï¿½ ajoutï¿½ avec succï¿½s.");
 
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de l'écriture dans le fichier.");
+            System.out.println("Une erreur est survenue lors de l'ï¿½criture dans le fichier.");
             e.printStackTrace();
         }
     }
 
-    public void supprimerUtilisateur(Utilisateur utilisateur) {
-    	
+	public void supprimerUtilisateur(Utilisateur utilisateur) {
+	    String cheminFichierUtilisateurs = "src/data/utilisateurs.csv"; // Assurez-vous que le chemin est correct
+	    File inputFile = new File(cheminFichierUtilisateurs);
+	    File tempFile = new File(inputFile.getAbsolutePath() + ".tmp");
+
+	    System.out.println("DÃ©but de la suppression de l'utilisateur...");
+
+	    if (!inputFile.exists()) {
+	        System.out.println("Le fichier n'existe pas : " + cheminFichierUtilisateurs);
+	        return;
+	    }
+
+	    boolean isDeleted = false;
+
+	    try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+	         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+
+	        String currentLine;
+
+	        while ((currentLine = reader.readLine()) != null) {
+	            // Supposons que l'ID utilisateur est unique et qu'il est le premier Ã©lÃ©ment de chaque ligne
+	            String trimmedLine = currentLine.trim();
+	            String[] userDetails = trimmedLine.split(",");
+	            if (userDetails[4].equals(utilisateur.getId())) {
+	                // Utilisateur trouvÃ©, ne pas l'Ã©crire dans le fichier temporaire
+	                isDeleted = true;
+	                continue;
+	            }
+	            // Utilisateur non trouvÃ©, Ã©crire dans le fichier temporaire
+	            writer.write(currentLine + System.getProperty("line.separator"));
+	        }
+
+	        writer.close();
+	        reader.close();
+
+	        // Supprime l'ancien fichier et renomme le temporaire
+	        if (isDeleted && tempFile.renameTo(inputFile)) {
+	            System.out.println("L'utilisateur a Ã©tÃ© supprimÃ© avec succÃ¨s.");
+	        } else if (!isDeleted) {
+	            System.out.println("L'utilisateur n'a pas Ã©tÃ© trouvÃ© dans le fichier.");
+	        } else {
+	            System.out.println("Impossible de renommer le fichier temporaire.");
+	        }
+	    } catch (IOException e) {
+	        System.out.println("Une erreur est survenue lors de la lecture ou de l'Ã©criture dans le fichier.");
+	        e.printStackTrace();
+	    } finally {
+            if (tempFile.exists()) {
+                System.out.println("Suppression du fichier temporaire.");
+                tempFile.delete(); // Supprime le fichier temporaire dans tous les cas
+            }
+        }
     }
+    	
     
     public boolean sAuthentifier(String motDePasse) {
 	    return this.mdp.equals(motDePasse);
@@ -116,24 +194,25 @@ public class Administrateur extends Personne {
     
     public void activer_com(Film film) {	
     	if (film.isCom_actif()) {
-    		System.out.println("Les commentaires sont déjà activés pour ce film");
+    		System.out.println("Les commentaires sont dï¿½jï¿½ activï¿½s pour ce film");
     	}
     	else {
     		film.setCom_actif(true);
-    		System.out.println("Les commentaires sont désormais activés pour ce film");
+    		System.out.println("Les commentaires sont dï¿½sormais activï¿½s pour ce film");
     	}
     }
     
     public void desactiver_com(Film film) {
     	if (film.isCom_actif()) {
     		film.setCom_actif(false);
-    		System.out.println("Les commentaires sont désormais désactivés pour ce film");
+    		System.out.println("Les commentaires sont dï¿½sormais dï¿½sactivï¿½s pour ce film");
     	}
     	else {
-    		System.out.println("Les commentaires sont déjà désactivés pour ce film");
+    		System.out.println("Les commentaires sont dï¿½jï¿½ dï¿½sactivï¿½s pour ce film");
     	}
     }
     
+    // METHODE SUR LES STATISTIQUES 
     
 
 

@@ -1,7 +1,6 @@
 code,titre,annee_prod,com_actif,description,prix,note_moy,producteurNom,producteurPrenom,type
-FILM001,Inception,2010,true,"Un voleur qui s'infiltre dans les rêves...",15.0,8.8,Christopher,Nolan,ScienceFiction
-FILM002,Pulp Fiction,1994,true,"L'histoire croisée de plusieurs personnages...",12.0,9.3,Quentin,Tarantino,Drame
-FILM003,The Lord of the Rings,2001,true,"La quête pour détruire l'anneau...",18.0,9.0,Peter,Jackson,Fantasy
-FILM004,Jurassic Park,1993,true,"Un parc thématique avec des dinosaures vivants...",10.0,8.5,Steven,Spielberg,Adventure
-FILM005,Blade Runner,1982,true,"Un chasseur de primes traque des androïdes...",8.0,8.2,Ridley,Scott,ScienceFiction
-FILM006,Inception,2010,true,Un voleur qui infiltre les rêves,10,99,Christopher,Nolan,Action
+FILM001,Inception,2010,true,Un voleur qui s'infiltre dans les rêves...,15,8.8,Christopher,Nolan,ScienceFiction
+FILM002,Pulp Fiction,1994,true,L'histoire croisée de plusieurs personnages...,12,9.3,Quentin,Tarantino,Drame
+FILM003,The Lord of the Rings,2001,true,La quête pour détruire l'anneau...,18,9,Peter,Jackson,Fantasy
+FILM004,Jurassic Park,1993,true,Un parc thématique avec des dinosaures vivants...,10,8.5,Steven,Spielberg,Adventure
+FILM005,Blade Runner,1982,true,Un chasseur de primes traque des androïdes...,8,8.2,Ridley,Scott,ScienceFiction

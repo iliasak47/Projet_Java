@@ -86,6 +86,10 @@ public class Film {
     public void setPrix(float prix) {
         this.prix = prix;
     }
+    
+    public void setNote_moy(float note_moy) {
+        this.note_moy = note_moy;
+    }
 
     public float getNote_moy() {
         return note_moy;
@@ -119,7 +123,7 @@ public class Film {
     public void afficher_com() {
         // VÃ©rifier si les commentaires sont dÃ©sactivÃ©s pour le film
         if (!this.com_actif) {
-            System.out.println("Les commentaires sont désactivés pour le film \"" + this.titre + "\".");
+            System.out.println("Les commentaires sont dï¿½sactivï¿½s pour le film \"" + this.titre + "\".");
         } else if (this.commentaires.isEmpty()) {
             System.out.println("Aucun commentaire pour le film \"" + this.titre + "\".");
         } else {
