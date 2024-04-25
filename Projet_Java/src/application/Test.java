@@ -34,11 +34,16 @@ public class Test {
     	
     	Producteur producteur = new Producteur("Christopher", "Nolan");
         Utilisateur utilisateur = new Utilisateur("Adam", "Halladja", "jnkne@example.com", "788 Main St", "X", "X", new Date(), "adam123");
-
     	Film film1 = new Film("FILM006", "Inception", 2010, true, "Un voleur qui infiltre les rêves", 10.99f, producteur, Type_Film.Action);
-        Administrateur a = new Administrateur("John", "Doe", "john.doe@example.com", "123 Main St", "userID1", "mdp123");
-        //a.ajouterFilm(film1);
-        a.ajouterUtilisateur(utilisateur);
+    	Administrateur a = new Administrateur("John", "Doe", "john.doe@example.com", "123 Main St", "userID1", "mdp123");
+        // a.ajouterFilm(film1);
+        // a.ajouterUtilisateur(utilisateur);
+    	// a.activer_com(film1);
+    	// a.desactiver_com(film1);
+    	// film1.afficher_com();
+    	
+    	a.supprimerFilm(film1);
+    	
         
         
         

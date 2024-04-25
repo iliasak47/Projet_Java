@@ -119,7 +119,7 @@ public class Film {
     public void afficher_com() {
         // Vérifier si les commentaires sont désactivés pour le film
         if (!this.com_actif) {
-            System.out.println("Les commentaires sont désactivés pour le film \"" + this.titre + "\".");
+            System.out.println("Les commentaires sont d�sactiv�s pour le film \"" + this.titre + "\".");
         } else if (this.commentaires.isEmpty()) {
             System.out.println("Aucun commentaire pour le film \"" + this.titre + "\".");
         } else {
