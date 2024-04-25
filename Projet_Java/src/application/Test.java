@@ -28,8 +28,7 @@ public class Test {
     
     	// Interface 
     	Interface i = new Interface();
-    	Film film = i.obtenirFilm("Inception");
-    	System.out.println(film);
+    	i.menu();
     	
     	
     	

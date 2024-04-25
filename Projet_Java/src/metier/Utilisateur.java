@@ -72,11 +72,10 @@ public class Utilisateur extends Personne {
         System.out.println("Le commentaire a ete mis a jour.");
     }
     
-    public Commentaire commenter(String texte, Film film) { 
+    public void commenter(String texte, Film film) { 
     	Commentaire c = new Commentaire(texte, new Date(), this, film);
     	this.commentaires.add(c);
     	film.ajouter_com(c);
-    	return c;
     }
     
     public void afficher_com(Film film) {
@@ -101,21 +100,21 @@ public class Utilisateur extends Personne {
     
     public void s_abonner() {
     	if (this.abonne) {
-            System.out.println("Vous êtes déjà  abonné");
+            System.out.println("Vous ï¿½tes dï¿½jï¿½ abonnï¿½");
         }
    	 	else {
             setAbonne(true);
-            System.out.println("Vous êtes désormais abonné");
+            System.out.println("Vous ï¿½tes dï¿½sormais abonnï¿½");
         }
     }
     
     public void se_desabonner() {
     	if (!this.abonne) {
-            System.out.println("Vous n'êtes pas abonné");
+            System.out.println("Vous n'ï¿½tes pas abonnï¿½");
         }
    	 	else {
             setAbonne(false);
-            System.out.println("Vous êtes désormais désabonné");
+            System.out.println("Vous ï¿½tes dï¿½sormais dï¿½sabonnï¿½");
         }
     }
     
@@ -135,7 +134,7 @@ public class Utilisateur extends Personne {
  
         ArrayList<Film> filmsAchetes = new ArrayList<>();
         String input;
-        System.out.println("Entrez les numéros des films que vous souhaitez acheter (séparés par des espaces) :");
+        System.out.println("Entrez les numï¿½ros des films que vous souhaitez acheter (sï¿½parï¿½s par des espaces) :");
         input = scanner.nextLine();
         String[] choixFilms = input.split(" ");
  
@@ -179,16 +178,16 @@ public class Utilisateur extends Personne {
     
     public void consulter_historique_achats_filtres() {
         if (achats.isEmpty()) {
-            System.out.println("Aucun achat enregistré pour " + this.prenom + " " + this.nom);
+            System.out.println("Aucun achat enregistrï¿½ pour " + this.prenom + " " + this.nom);
             return;
         }
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choisissez le mode de tri pour l'historique des achats :");
         System.out.println("1. Date croissante");
-        System.out.println("2. Date décroissante");
+        System.out.println("2. Date dï¿½croissante");
         System.out.println("3. Montant croissant");
-        System.out.println("4. Montant décroissant");
+        System.out.println("4. Montant dï¿½croissant");
         System.out.print("Entrez votre choix (1, 2, 3 ou 4) : ");
         int choix = scanner.nextInt();
 
@@ -207,7 +206,7 @@ public class Utilisateur extends Personne {
                 Collections.sort(achats, Comparator.comparing(Commande::getMontant).reversed());
                 break;
             default:
-                System.out.println("Choix invalide. Affichage par défaut (date croissante).");
+                System.out.println("Choix invalide. Affichage par dï¿½faut (date croissante).");
                 Collections.sort(achats, Comparator.comparing(Commande::getDate));
                 break;
         }
