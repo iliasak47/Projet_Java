@@ -27,8 +27,8 @@ public class Test {
     	// ----------------MENU-----------------------
     
     	// Interface 
-    	Interface i = new Interface();
-    	i.menu();
+    	// Interface i = new Interface();
+    	// i.menu();
     	
     	
     	
@@ -52,14 +52,15 @@ public class Test {
         // ---------------------- CREATTION DE SIMULATION -------------------
 
         // Création d'un producteur pour les films de test
-        // Producteur producteur = new Producteur("Christopher", "Nolan");
+        Producteur producteur = new Producteur("Christopher", "Nolan");
  
         // Création de quelques films
-        // Film film1 = new Film("FILM001", "Inception", 2010, true, "Un voleur qui infiltre les rêves", 10.99f, producteur, Type_Film.Action);
+        Film film1 = new Film("FILM001", "Inception", 2010, true, "Un voleur qui infiltre les rêves", 10.99f, producteur, Type_Film.Action);
         // Film film2 = new Film("FILM002", "Interstellar", 2014, true, "Une aventure spatiale épique", 15.99f, producteur, Type_Film.Drame);
         
         // Création d'un utilisateur et ajout de films dans son panier
-        // Utilisateur utilisateur = new Utilisateur("John", "Doe", "john.doe@example.com", "123 Main St", "userID1", "mdp123", new Date(), "Secret");
+        Utilisateur utilisateur = new Utilisateur("John", "Doe", "john.doe@example.com", "123 Main St", "userID1", "mdp123", new Date(), "Secret");
+        // utilisateur.s_abonner();
         // utilisateur.ajouter_film_panier(film1);
         // utilisateur.ajouter_film_panier(film2);
  
@@ -68,9 +69,19 @@ public class Test {
         
     	// System.out.println("Test de la methode choisir_film_achat()");
         // utilisateur.choisir_film_achat();
-        // utilisateur.choisir_film_achat();
-        // utilisateur.consulter_historique_achats_filtres(); 
- 
+        // utilisateur.consulter_historique_achats(); 
+        
+        // --------------------------- TEST DE LA FONCTION FILTRE COMMENTAIRE ----------------
+        // Ajout d'un commentaire1 au film1
+        // String texte1 = "Le film ...1";
+        // String texte2 = "Le film ...2";
+        // String texte3 = "Le film ...3";
+        // Commentaire c1 = utilisateur.commenter(texte1, film1);
+        // Commentaire c2 = utilisateur.commenter(texte2, film1);
+        // Commentaire c3 = utilisateur.commenter(texte3, film1);
+        // utilisateur.modifier_com(c1, film1);
+        // film1.afficher_com();
+        // film1.afficher_com_filtre();
     	
     	
     }

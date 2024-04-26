@@ -1,6 +1,9 @@
 package metier;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Film {
     private String code;
@@ -129,11 +132,7 @@ public class Film {
         } else {
             System.out.println("Commentaires pour le film \"" + this.titre + "\":");
             for (Commentaire commentaire : this.commentaires) {
-                String auteur = "Anonyme";
-                if (commentaire.getUtilisateur() != null) {
-                    auteur = commentaire.getUtilisateur().getPrenom() + " " + commentaire.getUtilisateur().getNom();
-                }
-                System.out.println("Date: " + commentaire.getDate() + " | Auteur: " + auteur);
+                System.out.println("Date: " + commentaire.getDate() + " | Auteur: " + commentaire.getUtilisateur().getPrenom() + " " + commentaire.getUtilisateur().getNom());
                 System.out.println("Commentaire: " + commentaire.getTexte());
                 System.out.println("-------------------------------------------------");
             }
@@ -142,8 +141,42 @@ public class Film {
 
 
 
-    public void afficher_com_filtres(String string) {
-        // Implémentation pour afficher les commentaires filtrés
+    public void afficher_com_filtre() {
+        Scanner scanner = new Scanner(System.in);
+        if (!this.com_actif) {
+            System.out.println("Les commentaires sont désactivés pour le film \"" + this.titre + "\".");
+        } else if (this.commentaires.isEmpty()) {
+            System.out.println("Aucun commentaire pour le film \"" + this.titre + "\".");
+        } else {
+            System.out.println("Choisissez le mode de tri pour les commentaires :");
+            System.out.println("1. Date croissante");
+            System.out.println("2. Date décroissante");
+            System.out.print("Entrez votre choix (1 ou 2) : ");
+            
+            int choix = scanner.nextInt();
+            scanner.nextLine();  // Consume newline left-over
+     
+            // Tri des commentaires selon le choix de l'utilisateur
+            switch (choix) {
+                case 1:
+                    Collections.sort(this.commentaires, Comparator.comparing(Commentaire::getDate));
+                    break;
+                case 2:
+                    Collections.sort(this.commentaires, Comparator.comparing(Commentaire::getDate).reversed());
+                    break;
+                default:
+                    System.out.println("Choix invalide. Affichage par défaut (date croissante).");
+                    Collections.sort(this.commentaires, Comparator.comparing(Commentaire::getDate));
+                    break;
+            }
+     
+            System.out.println("Commentaires pour le film \"" + this.titre + "\":");
+            for (Commentaire commentaire : this.commentaires) {
+                System.out.println("Date: " + commentaire.getDate() + " | Auteur: " + commentaire.getUtilisateur().getNom() +" "+ commentaire.getUtilisateur().getPrenom());
+                System.out.println("Commentaire: " + commentaire.getTexte());
+                System.out.println("-------------------------------------------------");
+            }
+        }
     }
 
     public void ajouter_acteur(Acteur acteur) {

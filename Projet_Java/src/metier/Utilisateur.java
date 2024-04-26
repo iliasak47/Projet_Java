@@ -60,7 +60,6 @@ public class Utilisateur extends Personne {
     	this.ajouter_note(n);
     }
     
-    public void filter_com(Film film, String string) {}
     
     public void modifier_com(Commentaire commentaire, Film film) { 
         Scanner scanner = new Scanner(System.in); 
@@ -68,14 +67,15 @@ public class Utilisateur extends Personne {
         String texte = scanner.nextLine(); 
         commentaire.setTexte(texte);
         commentaire.setDate(new Date());
-        scanner.close(); 
+        //scanner.close(); 
         System.out.println("Le commentaire a ete mis a jour.");
     }
     
-    public void commenter(String texte, Film film) { 
+    public Commentaire commenter(String texte, Film film) { 
     	Commentaire c = new Commentaire(texte, new Date(), this, film);
     	this.commentaires.add(c);
     	film.ajouter_com(c);
+    	return c;
     }
     
     public void afficher_com(Film film) {
@@ -163,10 +163,18 @@ public class Utilisateur extends Personne {
         for (Film film : filmsAchetes) {
             total += film.getPrix();
         }
+        
+        if (this.isAbonne()){
+        	total = total * 0.8f;
+        }
+        
         nouvelleCommande.setMontant(total);
  
         // Ajout de la commande aux achats
         this.ajouter_achat(nouvelleCommande);
+        if (this.isAbonne()) {
+        	System.out.println("Vous êtes abonné vous bénéficiez de 20% de réduction ! ;-) ");
+        }
         System.out.println("Commande creee avec succes. Montant total : " + total + "euros");
         
         // Retirer les films achetés du panier 
