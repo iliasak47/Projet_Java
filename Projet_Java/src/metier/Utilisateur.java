@@ -251,8 +251,14 @@ public class Utilisateur extends Personne {
         int compteurTypeMajoritaire = 0;
 
         for (Film film : tousLesFilms) {
-            if (!filmsAchetes.contains(film)) {
-                System.out.println("Film considéré pour la vitrine: " + film.getTitre() + " - Type: " + film.getType());
+            boolean dejaAchete = false;
+            for (Film filmAchete : filmsAchetes) {
+                if (film.getCode().equals(filmAchete.getCode())) {
+                    dejaAchete = true;
+                    break;
+                }
+            }
+            if (!dejaAchete) {
                 if (film.getType().equals(typeMajoritaire) && compteurTypeMajoritaire < 3) {
                     selectionVitrine.add(film);
                     compteurTypeMajoritaire++;
