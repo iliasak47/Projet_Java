@@ -5,6 +5,8 @@ import java.util.Scanner;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Utilisateur extends Personne {
     private ArrayList<Film> panier = new ArrayList<Film>();
@@ -224,6 +226,50 @@ public class Utilisateur extends Personne {
             System.out.println(c + "\n");
         }
     }
+    
+    public void afficherVitrine() {
+        // Lire tous les films et les films déjà achetés
+        ArrayList<Film> tousLesFilms = Data.lireFilms("src/data/films.csv");
+        ArrayList<Film> filmsAchetes = Data.lireFilmsUtilisateur(this.id,"src/data/commandes.csv","src/data/films.csv");
+
+        System.out.println("Films déjà achetés par l'utilisateur:");
+        for (Film film : filmsAchetes) {
+            System.out.println(film.getTitre());
+        }
+
+        // Déterminer le type de film le plus fréquent
+        HashMap<Type_Film, Integer> typeCompteur = new HashMap<>();
+        for (Film film : filmsAchetes) {
+            typeCompteur.put(film.getType(), typeCompteur.getOrDefault(film.getType(), 0) + 1);
+        }
+        Type_Film typeMajoritaire = Collections.max(typeCompteur.entrySet(), Map.Entry.comparingByValue()).getKey();
+
+        System.out.println("Type majoritaire: " + typeMajoritaire);
+
+        // Sélectionner les films pour la vitrine
+        ArrayList<Film> selectionVitrine = new ArrayList<>();
+        int compteurTypeMajoritaire = 0;
+
+        for (Film film : tousLesFilms) {
+            if (!filmsAchetes.contains(film)) {
+                System.out.println("Film considéré pour la vitrine: " + film.getTitre() + " - Type: " + film.getType());
+                if (film.getType().equals(typeMajoritaire) && compteurTypeMajoritaire < 3) {
+                    selectionVitrine.add(film);
+                    compteurTypeMajoritaire++;
+                } else if (selectionVitrine.size() < 10) {
+                    selectionVitrine.add(film);
+                }
+            }
+            if (selectionVitrine.size() == 10) break;
+        }
+
+        // Afficher les films sélectionnés pour la vitrine
+        System.out.println("Films sélectionnés pour la vitrine:");
+        for (Film film : selectionVitrine) {
+            System.out.println(film.getTitre() + " - Type: " + film.getType());
+        }
+    }
+
     
     public void ajouter_achat(Commande c) {
     	this.achats.add(c);

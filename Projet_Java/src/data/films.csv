@@ -1,6 +1,21 @@
-code,titre,annee_prod,com_actif,description,prix,note_moy,producteurNom,producteurPrenom,type
-FILM001,Inception,2010,true,Un voleur qui s'infiltre dans les rêves...,15,8.8,Christopher,Nolan,ScienceFiction
-FILM002,Pulp Fiction,1994,true,L'histoire croisée de plusieurs personnages...,12,9.3,Quentin,Tarantino,Drame
-FILM003,The Lord of the Rings,2001,true,La quête pour détruire l'anneau...,18,9,Peter,Jackson,Fantasy
-FILM004,Jurassic Park,1993,true,Un parc thématique avec des dinosaures vivants...,10,8.5,Steven,Spielberg,Adventure
-FILM005,Blade Runner,1982,true,Un chasseur de primes traque des androïdes...,8,8.2,Ridley,Scott,ScienceFiction
+Code,Titre,AnneeProd,ComActif,Description,Prix,NoteMoy,ProducteurNom,ProducteurPrenom,Type
+FILM000,Ilias à Cauchy,2007,False,C’est l’histoire d’un raciste,18.4,5.2,Quentin,Tarantino,ScienceFiction
+FILM001,Ilias jjb adventures,1994,True,Ilias IA clé de bras,29.12,6.3,Steven,Spielberg,Thriller
+FILM002,Titre02,1993,True,Description of X2,24.28,8.6,David,Fincher,Action
+FILM003,Titre03,2018,False,Description of X3,48.91,6.5,Ridley,Scott,Action
+FILM004,Titre04,1999,True,Description of X4,48.4,6,Wes,Anderson,Action
+FILM005,Titre05,1995,False,Description of X5,23.62,9,Steven,Spielberg,Action
+FILM006,Titre06,2003,False,Description of X6,14.46,9.7,Steven,Spielberg,Thriller
+FILM007,Titre07,2012,False,Description of X7,27.84,8.8,James,Cameron,Thriller
+FILM008,Titre08,2007,False,Description of X8,12.14,6.7,Steven,Spielberg,Horreur
+FILM009,Titre09,2006,True,Description of X9,44.91,7.3,Denis,Villeneuve,Drame
+FILM010,Titre10,1994,True,Description of X10,15.87,9.4,James,Cameron,Thriller
+FILM011,Titre11,2000,False,Description of X11,12.76,5.8,Quentin,Tarantino,ScienceFiction
+FILM012,Titre12,2012,False,Description of X12,22.4,6.4,Ridley,Scott,Thriller
+FILM013,Titre13,1995,False,Description of X13,14.29,7.2,James,Cameron,Action
+FILM014,Titre14,1993,False,Description of X14,18.26,7.9,Christopher,Nolan,ScienceFiction
+FILM015,Titre15,2009,True,Description of X15,41.49,6.6,James,Cameron,Drame
+FILM016,Titre16,2010,False,Description of X16,38.52,5.8,Martin,Scorsese,Drame
+FILM017,Titre17,1995,True,Description of X17,34.76,9.1,Martin,Scorsese,Drame
+FILM018,Titre18,2012,True,Description of X18,14.11,9,Martin,Scorsese,Action
+FILM019,Titre19,2017,False,Description of X19,44.37,8.2,Christopher,Nolan,Drame

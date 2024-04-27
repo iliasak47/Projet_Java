@@ -37,7 +37,7 @@ public class Test {
     	// ---------------------- TEST DES FONCTIONS ADMINISTRATEURS ----------------------------------------------
     	
     	// Producteur producteur = new Producteur("Christopher", "Nolan");
-    	// Utilisateur utilisateur1 = new Utilisateur("Adam", "Halladja", "jnkne@example.com", "788 Main St", "X", "X", new Date(), "adam123");
+    	Utilisateur utilisateur1 = new Utilisateur("Adam", "Halladja", "jnkne@example.com", "788 Main St", "X", "X", new Date(), "adam123");
     	// Film film1 = new Film("FILM006", "Le Prestige", 2000, true, "Description du film blablabla", 10.99f,producteur, Type_Film.Action);
     	// Administrateur a = new Administrateur("John", "Doe", "john.doe@example.com", "123 Main St", "userID1", "mdp123");
     	// a.supprimerUtilisateur(utilisateur1);
@@ -52,19 +52,18 @@ public class Test {
         // ---------------------- CREATTION DE SIMULATION -------------------
 
         // Création d'un producteur pour les films de test
-        Producteur producteur = new Producteur("Christopher", "Nolan");
+        // Producteur producteur = new Producteur("Christopher", "Nolan");
  
         // Création de quelques films
-        Film film1 = new Film("FILM001", "Inception", 2010, true, "Un voleur qui infiltre les rêves", 10.99f, producteur, Type_Film.Action);
+        // Film film1 = new Film("FILM001", "Inception", 2010, true, "Un voleur qui infiltre les rêves", 10.99f, producteur, Type_Film.Action);
         // Film film2 = new Film("FILM002", "Interstellar", 2014, true, "Une aventure spatiale épique", 15.99f, producteur, Type_Film.Drame);
         
         // Création d'un utilisateur et ajout de films dans son panier
-        Utilisateur utilisateur = new Utilisateur("John", "Doe", "john.doe@example.com", "123 Main St", "userID1", "mdp123", new Date(), "Secret");
+        // Utilisateur utilisateur = new Utilisateur("John", "Doe", "john.doe@example.com", "123 Main St", "userID1", "mdp123", new Date(), "Secret");
         // utilisateur.s_abonner();
         // utilisateur.ajouter_film_panier(film1);
         // utilisateur.ajouter_film_panier(film2);
  
-    	
         // ---------------------- SIMULATION INTERACTION UTILISATEUR ACHAT ---------------------- 
         
     	// System.out.println("Test de la methode choisir_film_achat()");
@@ -82,6 +81,31 @@ public class Test {
         // utilisateur.modifier_com(c1, film1);
         // film1.afficher_com();
         // film1.afficher_com_filtre();
+    	
+    	// ---------------------- TEST DE LA FONCTION GENERER STAT D'ADMIN ----------------------
+    	// Administrateur a = new Administrateur("John", "Doe", "john.doe@example.com", "123 Main St", "userID1", "mdp123");
+    	// a.genererStatistiquesUtilisateurs();
+    	// a.genererStatistiquesFilms();
+    	// a.genererStatistiquesCommandes();
+    	
+    	// ---------------------- TEST DE LA FONCTION LireFilms DE LA CLASSE DATA ----------------------
+    	// ArrayList<Film> listeFilms = Data.lireFilms("src/data/films.csv");
+    	// for (Film film : listeFilms) {
+    	    //System.out.println(film);
+    	//}
+    	
+    	// ---------------------- TEST DES FONCTIONS DE LA CLASSE DATA ----------------------
+    	Utilisateur u = Data.getUtilisateurById("user001", "src/data/utilisateurs.csv");
+    	
+    	// utilisateur1.afficherVitrine();
+    	// System.out.println(utilisateur1);
+    	
+    	 /*ArrayList<Film> listeFilmsUtilisateur = Data.lireFilmsUtilisateur("user001", "src/data/commandes.csv", "src/data/films.csv");
+    	 for (Film film : listeFilmsUtilisateur) {
+     	    System.out.println(film);
+     	}*/
+    	u.afficherVitrine();
+    	
     	
     	
     }

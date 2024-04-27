@@ -1,6 +1,11 @@
-nom,prenom
-Christopher,Nolan
-Quentin,Tarantino
-Peter,Jackson
-Steven,Spielberg
-Ridley,Scott
+Nom,Prenom,ID des Films Produits
+Christopher,Nolan,FILM001|FILM003|FILM012
+Steven,Spielberg,FILM002|FILM013
+Ridley,Scott,FILM004
+Bong,Joon Ho,FILM005
+Denis,Villeneuve,FILM006
+Quentin,Tarantino,FILM007
+Martin,Scorsese,FILM008
+James,Cameron,FILM009
+David,Fincher,FILM010
+Wes,Anderson,FILM011

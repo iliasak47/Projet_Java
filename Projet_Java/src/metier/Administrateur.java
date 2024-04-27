@@ -1,6 +1,8 @@
 package metier;
 
 import java.io.*;
+import java.util.*;
+import java.text.SimpleDateFormat;
 
 public class Administrateur extends Personne {
 	
@@ -212,9 +214,122 @@ public class Administrateur extends Personne {
     	}
     }
     
-    // METHODE SUR LES STATISTIQUES 
+    public void genererStatistiquesUtilisateurs() {
+        String cheminFichier = "src/data/utilisateurs.csv";
+        int nombreTotal = 0;
+        int nombreAbonnes = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
+            String ligne;
+            reader.readLine(); // Ignorer les en-têtes si votre fichier en a
+            
+            while ((ligne = reader.readLine()) != null) {
+                String[] detailsUtilisateur = ligne.split(",");
+                nombreTotal++;
+                if (detailsUtilisateur.length > 8 && Boolean.parseBoolean(detailsUtilisateur[8])) {
+                    nombreAbonnes++;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la lecture du fichier: " + e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+        
+        // Calcul des pourcentages
+        double pourcentageAbonnes = (double) nombreAbonnes / nombreTotal * 100;
+        double pourcentageNonAbonnes = 100.0 - pourcentageAbonnes; 
+
+        // Affichage formaté des résultats
+        System.out.println("Statistiques des Utilisateurs:");
+        System.out.println("Nombre total d'utilisateurs: " + nombreTotal);
+        System.out.println(String.format("Nombre d'utilisateurs abonnés: %d (%.2f%%)", nombreAbonnes, pourcentageAbonnes));
+        System.out.println(String.format("Nombre d'utilisateurs non abonnés: %d (%.2f%%)", nombreTotal - nombreAbonnes, pourcentageNonAbonnes));
+    }
     
+    public void genererStatistiquesFilms() {
+        String cheminFichierFilms = "src/data/films.csv";
+        Map<String, Integer> filmsParType = new HashMap<>();
+        float prixTotal = 0;
+        float noteTotal = 0;
+        int nombreFilms = 0;
 
+        try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichierFilms))) {
+            String ligne;
+            
+            // Sauter la ligne d'en-tête
+            reader.readLine();
 
+            while ((ligne = reader.readLine()) != null) {
+                String[] detailsFilm = ligne.split(",");
+                // Supposons que la structure du fichier CSV est la suivante:
+                // code, titre, annee_prod, com_actif, description, prix, note_moy, producteur_nom, producteur_prenom, type_film
+                if (detailsFilm.length > 9) {
+                    String type = detailsFilm[9];
+                    float prix = Float.parseFloat(detailsFilm[5]);
+                    float note = Float.parseFloat(detailsFilm[6]);
+
+                    filmsParType.put(type, filmsParType.getOrDefault(type, 0) + 1);
+                    prixTotal += prix;
+                    noteTotal += note;
+                    nombreFilms++;
+                }
+            }
+
+            if (nombreFilms > 0) {
+                float prixMoyen = prixTotal / nombreFilms;
+                float noteMoyenne = noteTotal / nombreFilms;
+
+                System.out.println("Statistiques des Films:");
+                System.out.println("Nombre total de films: " + nombreFilms);
+                System.out.println("Prix moyen des films: " + String.format("%.2f", prixMoyen) + "€");
+                System.out.println("Note moyenne des films: " + String.format("%.2f", noteMoyenne) + "/10");
+                System.out.println("Répartition des films par type:");
+                filmsParType.forEach((type, count) -> System.out.println(type + ": " + count + " film(s)"));
+            } else {
+                System.out.println("Aucun film trouvé dans le fichier.");
+            }
+
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la lecture du fichier: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public void genererStatistiquesCommandes() {
+        String cheminFichierCommandes = "src/data/commandes.csv"; // Assurez-vous que ce chemin est correct
+        File fichierCommandes = new File(cheminFichierCommandes);
+        if (!fichierCommandes.exists()) {
+            System.out.println("Le fichier de commandes n'existe pas.");
+            return;
+        }
+
+        int nombreCommandes = 0;
+        float totalMontant = 0f;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fichierCommandes))) {
+            String line = reader.readLine(); // Lire l'en-tête si nécessaire, sinon commenter cette ligne
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length > 1) {
+                    float montant = Float.parseFloat(data[1]); // Assumer que le montant est à l'index 1
+                    totalMontant += montant;
+                    nombreCommandes++;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la lecture du fichier: " + e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+
+        float moyenneMontant = nombreCommandes > 0 ? totalMontant / nombreCommandes : 0;
+        
+        System.out.println("Statistiques des commandes :");
+        System.out.println("Nombre total de commandes : " + nombreCommandes);
+        System.out.println("Montant total des commandes : " + totalMontant + "€");
+        System.out.println("Montant moyen par commande : " + moyenneMontant + "€");
+    }
 }
 
