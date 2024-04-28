@@ -331,5 +331,55 @@ public class Administrateur extends Personne {
         System.out.println("Montant total des commandes : " + totalMontant + "€");
         System.out.println("Montant moyen par commande : " + moyenneMontant + "€");
     }
+    
+    public void modifierFilm(Film film) {
+        if (film == null) {
+            System.out.println("Le film fourni est null, aucune modification possible.");
+            return;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Vous modifiez le film : " + film.getTitre());
+        System.out.println("Que souhaitez-vous modifier ?");
+        System.out.println("1. Titre");
+        System.out.println("2. Description");
+        System.out.println("3. Année de production");
+        System.out.println("4. Prix");
+        System.out.print("Entrez votre choix (1-4): ");
+        int choix = scanner.nextInt();
+        scanner.nextLine(); // consomme la ligne restante après un nextInt()
+
+        switch (choix) {
+            case 1:
+                System.out.print("Entrez le nouveau titre : ");
+                String nouveauTitre = scanner.nextLine();
+                film.setTitre(nouveauTitre);
+                break;
+            case 2:
+                System.out.print("Entrez la nouvelle description : ");
+                String nouvelleDescription = scanner.nextLine();
+                film.setDescription(nouvelleDescription);
+                break;
+            case 3:
+                System.out.print("Entrez la nouvelle année de production : ");
+                int nouvelleAnneeProd = scanner.nextInt();
+                film.setAnnee_prod(nouvelleAnneeProd);
+                break;
+            case 4:
+                System.out.print("Entrez le nouveau prix : ");
+                float nouveauPrix = scanner.nextFloat();
+                film.setPrix(nouveauPrix);
+                break;
+            default:
+                System.out.println("Choix non valide.");
+                break;
+        }
+
+        System.out.println("Le film a été mis à jour avec succès.");
+        // Afficher les informations mises à jour du film
+        System.out.println(film);
+        //scanner.close(); // Attention : ne fermez pas le scanner si vous l'utilisez ailleurs dans l'application
+    }
+
 }
 

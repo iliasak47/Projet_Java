@@ -37,7 +37,7 @@ public class Test {
     	// ---------------------- TEST DES FONCTIONS ADMINISTRATEURS ----------------------------------------------
     	
     	// Producteur producteur = new Producteur("Christopher", "Nolan");
-    	Utilisateur utilisateur1 = new Utilisateur("Adam", "Halladja", "jnkne@example.com", "788 Main St", "X", "X", new Date(), "adam123");
+    	// Utilisateur utilisateur1 = new Utilisateur("Adam", "Halladja", "jnkne@example.com", "788 Main St", "X", "X", new Date(), "adam123");
     	// Film film1 = new Film("FILM006", "Le Prestige", 2000, true, "Description du film blablabla", 10.99f,producteur, Type_Film.Action);
     	// Administrateur a = new Administrateur("John", "Doe", "john.doe@example.com", "123 Main St", "userID1", "mdp123");
     	// a.supprimerUtilisateur(utilisateur1);
@@ -95,7 +95,7 @@ public class Test {
     	//}
     	
     	// ---------------------- TEST DES FONCTIONS DE LA CLASSE DATA ----------------------
-    	Utilisateur u = Data.getUtilisateurById("user001", "src/data/utilisateurs.csv");
+    	// Utilisateur u = Data.getUtilisateurById("user001", "src/data/utilisateurs.csv");
     	
     	// utilisateur1.afficherVitrine();
     	// System.out.println(utilisateur1);
@@ -104,7 +104,7 @@ public class Test {
     	 for (Film film : listeFilmsUtilisateur) {
      	    System.out.println(film);
      	}*/
-    	u.afficherVitrine();
+    	// u.afficherVitrine();
     	
     	
     	
