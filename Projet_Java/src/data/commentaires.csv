@@ -1,0 +1,21 @@
+id,texte,date,idUtilisateur,idFilm
+comment000,Excellent,06/10/2022,user003,FILM005
+comment001,Mauvais,14/10/2022,user006,FILM003
+comment002,Très bien,19/08/2023,user008,FILM007
+comment003,Génial,08/11/2023,user002,FILM007
+comment004,Décevant,22/05/2023,user003,FILM003
+comment005,Génial,04/05/2022,user002,FILM004
+comment006,Génial,09/06/2020,user005,FILM006
+comment007,Passionnant,28/01/2021,user001,FILM008
+comment008,Etonnant,08/10/2021,user002,FILM009
+comment009,Génial,10/04/2022,user000,FILM003
+comment010,Décevant,10/01/2021,user010,FILM009
+comment011,Décevant,21/05/2021,user010,FILM008
+comment012,Passionnant,17/04/2020,user004,FILM008
+comment013,Fascinant,31/07/2021,user007,FILM010
+comment014,Génial,28/09/2022,user008,FILM008
+comment015,Génial,19/02/2020,user000,FILM002
+comment016,Décevant,09/11/2021,user009,FILM006
+comment017,Etonnant,23/07/2021,user000,FILM007
+comment018,Excellent,27/04/2021,user008,FILM006
+comment019,Excellent,10/03/2021,user005,FILM005

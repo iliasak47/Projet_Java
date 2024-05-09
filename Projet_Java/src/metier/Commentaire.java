@@ -1,6 +1,7 @@
 package metier;
 
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Commentaire {
     private String texte;
@@ -56,7 +57,8 @@ public class Commentaire {
         StringBuilder sb = new StringBuilder();
         sb.append("Commentaire sur le film \"").append(film.getTitre()).append("\" par ");
         sb.append(utilisateur != null ? utilisateur.getPrenom() + " " + utilisateur.getNom() : "Anonyme");
-        sb.append(" le ").append(date).append(":\n");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        sb.append(" le ").append(formatter.format(this.date)).append(":\n");
         sb.append(texte);
         return sb.toString();
     }

@@ -1,9 +1,11 @@
 package metier;
 
-import java.util.ArrayList;
+import java.util.ArrayList;  
 import java.util.Scanner;
 import java.util.Collections;
 import java.util.Comparator;
+import java.text.SimpleDateFormat;
+
 
 public class Film {
     private String code;
@@ -19,7 +21,7 @@ public class Film {
     private Producteur producteur; 
     private Type_Film type;
 
-    // Constructeurr
+    // Constructeur
     public Film(String code, String titre, int annee_prod, boolean com_actif, String description, float prix, Producteur producteur, Type_Film type) {
         this.code = code;
         this.titre = titre;
@@ -126,31 +128,29 @@ public class Film {
     public void afficher_com() {
         // VÃ©rifier si les commentaires sont dÃ©sactivÃ©s pour le film
         if (!this.com_actif) {
-            System.out.println("Les commentaires sont dï¿½sactivï¿½s pour le film \"" + this.titre + "\".");
+            System.out.println("Les commentaires sont désactivés pour le film \"" + this.titre + "\".");
         } else if (this.commentaires.isEmpty()) {
             System.out.println("Aucun commentaire pour le film \"" + this.titre + "\".");
         } else {
             System.out.println("Commentaires pour le film \"" + this.titre + "\":");
             for (Commentaire commentaire : this.commentaires) {
-                System.out.println("Date: " + commentaire.getDate() + " | Auteur: " + commentaire.getUtilisateur().getPrenom() + " " + commentaire.getUtilisateur().getNom());
+            	System.out.println("Date: " + new SimpleDateFormat("dd/MM/yyyy HH:mm").format(commentaire.getDate()) + " | Auteur: " + commentaire.getUtilisateur().getPrenom() + " " + commentaire.getUtilisateur().getNom());
                 System.out.println("Commentaire: " + commentaire.getTexte());
                 System.out.println("-------------------------------------------------");
             }
         }
     }
 
-
-
     public void afficher_com_filtre() {
         Scanner scanner = new Scanner(System.in);
         if (!this.com_actif) {
-            System.out.println("Les commentaires sont dÃ©sactivÃ©s pour le film \"" + this.titre + "\".");
+            System.out.println("Les commentaires sont désactivés pour le film \"" + this.titre + "\".");
         } else if (this.commentaires.isEmpty()) {
             System.out.println("Aucun commentaire pour le film \"" + this.titre + "\".");
         } else {
             System.out.println("Choisissez le mode de tri pour les commentaires :");
             System.out.println("1. Date croissante");
-            System.out.println("2. Date dÃ©croissante");
+            System.out.println("2. Date décroissante");
             System.out.print("Entrez votre choix (1 ou 2) : ");
             
             int choix = scanner.nextInt();
@@ -165,14 +165,14 @@ public class Film {
                     Collections.sort(this.commentaires, Comparator.comparing(Commentaire::getDate).reversed());
                     break;
                 default:
-                    System.out.println("Choix invalide. Affichage par dÃ©faut (date croissante).");
+                    System.out.println("Choix invalide. Affichage par défaut (date croissante).");
                     Collections.sort(this.commentaires, Comparator.comparing(Commentaire::getDate));
                     break;
             }
      
             System.out.println("Commentaires pour le film \"" + this.titre + "\":");
             for (Commentaire commentaire : this.commentaires) {
-                System.out.println("Date: " + commentaire.getDate() + " | Auteur: " + commentaire.getUtilisateur().getNom() +" "+ commentaire.getUtilisateur().getPrenom());
+                System.out.println("Date: " + new SimpleDateFormat("dd/MM/yyyy").format(commentaire.getDate()) + " | Auteur: " + commentaire.getUtilisateur().getNom() +" "+ commentaire.getUtilisateur().getPrenom());
                 System.out.println("Commentaire: " + commentaire.getTexte());
                 System.out.println("-------------------------------------------------");
             }
@@ -192,29 +192,30 @@ public class Film {
         calculer_note_moy();
     }
 
-    // MÃ©thode pour calculer la note moyenne basÃ©e sur les notes et afficher cette note moyenne
+    // Méthodes pour calculer la note moyenne basée sur les notes et afficher cette note moyenne
     public void calculer_note_moy() {
         float somme = 0;
         for (Note note : this.notes) {
             somme += note.getNote();
         }
         this.note_moy = notes.isEmpty() ? 0.0f : somme / notes.size();
-        // Afficher la note moyenne
+    }
+    
+    public void afficher_note_moy() {
         System.out.println("La note moyenne pour le film " + this.titre + " est de : " + this.note_moy + "/10");
     }
-
     
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Film: ").append(this.titre).append("\n");
         sb.append("Code: ").append(this.code).append("\n");
-        sb.append("ThÃ¨me: ").append(this.type).append("\n");
-        sb.append("AnnÃ©e de production: ").append(this.annee_prod).append("\n");
+        sb.append("Thème: ").append(this.type).append("\n");
+        sb.append("Année de production: ").append(this.annee_prod).append("\n");
         sb.append("Description: ").append(this.description).append("\n");
-        sb.append("Prix: ").append(this.prix).append("â‚¬\n");
+        sb.append("Prix: ").append(this.prix).append("€\n");
         sb.append("Note moyenne: ").append(this.note_moy).append("/10").append("\n");
-        sb.append("Producteur: ").append(this.producteur != null ? this.producteur.getNom() : "Non spÃ©cifiÃ©").append("\n");
+        sb.append("Producteur: ").append(this.producteur != null ? this.producteur.getNom() : "Non spécifié").append("\n");
         sb.append("Commentaires actifs: ").append(this.com_actif ? "Oui" : "Non").append("\n");
         if (!acteurs.isEmpty()) {
             sb.append("Acteurs:\n");

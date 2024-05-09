@@ -1,6 +1,7 @@
 package metier;
 
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Commande {
@@ -58,23 +59,29 @@ public class Commande {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Commande effectuÃ©e le : ").append(this.date).append("\n");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        sb.append("Commande effectuée le : ").append(formatter.format(this.date)).append("\n");
         sb.append("Utilisateur : ").append(this.utilisateur.getPrenom()).append(" ").append(this.utilisateur.getNom()).append("\n");
         sb.append("-------------------------------------------------\n");
         sb.append("Liste des films :\n");
-        
+
         if (this.films.isEmpty()) {
             sb.append("Aucun film dans cette commande.\n");
         } else {
             for (Film film : this.films) {
-                sb.append("Film : ").append(film.getTitre()).append(" - Prix : ").append(film.getPrix()).append("â‚¬\n");
+                sb.append("Film : ").append(film.getTitre()).append(" - Prix : ").append(film.getPrix()).append("€\n");
             }
         }
 
         sb.append("-------------------------------------------------\n");
-        sb.append("Montant total : ").append(this.montant).append("â‚¬\n");
+        if (this.utilisateur.isAbonne()) {
+            sb.append("Réduction de 20% appliquée grâce à votre abonnement.\n");
+            sb.append("-------------------------------------------------\n");
+        }
+        sb.append("Montant total : ").append(String.format("%.2f€", this.montant)).append("\n");
         return sb.toString();
     }
+
 
 
 

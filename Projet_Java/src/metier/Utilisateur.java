@@ -1,6 +1,7 @@
 package metier;
 
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,7 +18,7 @@ public class Utilisateur extends Personne {
     private String phrase_secrete;
     private boolean abonne;
  
-    // Constructor Test
+    // Constructor
     public Utilisateur(String nom, String prenom, String mail, String adresse, String id, String mdp, Date date_naissance, String phrase_secrete) {
         super(nom, prenom, mail, adresse, id, mdp);
         this.date_naissance = date_naissance;
@@ -26,64 +27,78 @@ public class Utilisateur extends Personne {
     }
 
     // Getter Setter
-	public Date getDate_naissance() {
-		return date_naissance;
-	}
+    public Date getDate_naissance() {
+        return date_naissance;
+    }
 
-	public void setDate_naissance(Date date_naissance) {
-		this.date_naissance = date_naissance;
-	}
+    public void setDate_naissance(Date date_naissance) {
+        this.date_naissance = date_naissance;
+    }
 
-	public String getPhrase_secrete() {
-		return phrase_secrete;
-	}
+    public String getPhrase_secrete() {
+        return phrase_secrete;
+    }
 
-	public void setPhrase_secrete(String phrase_secrete) {
-		this.phrase_secrete = phrase_secrete;
-	}
+    public void setPhrase_secrete(String phrase_secrete) {
+        this.phrase_secrete = phrase_secrete;
+    }
 
-	public boolean isAbonne() {
-		return abonne;
-	}
+    public boolean isAbonne() {
+        return abonne;
+    }
 
-	public void setAbonne(boolean abonne) {
-		this.abonne = abonne;
-	}
-	
-
-    // Method 
-	public boolean sAuthentifier(String motDePasse) {
-	    return this.mdp.equals(motDePasse);
-	}
-
+    public void setAbonne(boolean abonne) {
+        this.abonne = abonne;
+    }
+    
+    // Method
+   
     public void noter(Film film, float note) {
-    	Note n = new Note(note, film, this);
-    	film.ajouter_note(n);
-    	this.ajouter_note(n);
+        Note n = new Note(note, film, this);
+        film.ajouter_note(n);
+        this.ajouter_note(n);
+    }
+  
+    public void modifierCommentaire(int index, String nouveauTexte) {
+        if (index >= 0 && index < commentaires.size()) {
+            Commentaire commentaire = commentaires.get(index);
+            commentaire.setTexte(nouveauTexte);
+            commentaire.setDate(new Date());  // Met à jour la date du commentaire modifié
+        } else {
+            throw new IndexOutOfBoundsException("Index de commentaire invalide");
+        }
     }
     
-    
-    public void modifier_com(Commentaire commentaire, Film film) { 
-        Scanner scanner = new Scanner(System.in); 
-        System.out.println("Saisissez le nouveau commentaire pour le film " + film.getTitre() + ":");
-        String texte = scanner.nextLine(); 
-        commentaire.setTexte(texte);
-        commentaire.setDate(new Date());
-        //scanner.close(); 
-        System.out.println("Le commentaire a ete mis a jour.");
+    public void afficherMesCommentaires() {
+        if (commentaires.isEmpty()) {
+            System.out.println("Vous n'avez aucun commentaire.");
+            return;
+        }
+        int index = 1;
+        System.out.println("----------- Mes Commentaires -----------");
+        for (Commentaire commentaire : commentaires) {
+            System.out.println(index++ + ". " + commentaire.getTexte() + " (Film: " + commentaire.getFilm().getTitre() + ")");
+        }
     }
     
-    public Commentaire commenter(String texte, Film film) { 
-    	Commentaire c = new Commentaire(texte, new Date(), this, film);
-    	this.commentaires.add(c);
-    	film.ajouter_com(c);
-    	return c;
+    public boolean hasCommentaires() {
+        return !this.commentaires.isEmpty();  // Retourne true si la liste des commentaires n'est pas vide
     }
     
-    public void afficher_com(Film film) {
-    	film.afficher_com();
-    } 
-    
+    public Commentaire commenter(String texte, Film film) {
+        // Vérifie si les commentaires sont actifs pour le film
+        if (!film.isCom_actif()) {
+            System.out.println("Les commentaires ne sont pas activés pour ce film.");
+            return null;
+        }
+
+        Commentaire c = new Commentaire(texte, new Date(), this, film);
+        this.commentaires.add(c);
+        film.ajouter_com(c);
+        System.out.println("Votre commentaire a été ajouté.");
+        return c;
+    }
+
     public void ajouter_com(Commentaire commentaire) {
     	this.commentaires.add(commentaire);
     }
@@ -91,117 +106,128 @@ public class Utilisateur extends Personne {
     public void supprimer_com(Commentaire commentaire) {
     	this.commentaires.remove(commentaire);
     }
+
+    public void afficher_com(Film film) {
+        film.afficher_com();
+    } 
+    
+    public void afficher_com_filtre(Film film) {
+    	film.afficher_com_filtre();
+    }
     
     public void ajouter_film_panier(Film film) {
-    	this.panier.add(film);
+        this.panier.add(film);
     }
-    
+
     public void supprimer_film_panier(Film film) {
-    	this.panier.remove(film);
+        this.panier.remove(film);
     }
-    
+
     public void s_abonner() {
-    	if (this.abonne) {
-            System.out.println("Vous �tes d�j� abonn�");
-        }
-   	 	else {
+        if (this.abonne) {
+            System.out.println("Vous êtes déjà abonné");
+        } else {
             setAbonne(true);
-            System.out.println("Vous �tes d�sormais abonn�");
+            System.out.println("Vous êtes désormais abonné");
         }
     }
-    
+
     public void se_desabonner() {
-    	if (!this.abonne) {
-            System.out.println("Vous n'�tes pas abonn�");
-        }
-   	 	else {
+        if (!this.abonne) {
+            System.out.println("Vous n'êtes pas abonné");
+        } else {
             setAbonne(false);
-            System.out.println("Vous �tes d�sormais d�sabonn�");
+            System.out.println("Vous êtes désormais désabonné");
         }
     }
     
-    // creer un objet
     public void choisir_film_achat() {
         if (panier.isEmpty()) {
             System.out.println("Votre panier est vide.");
             return;
         }
- 
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Liste des films dans votre panier :");
         int index = 1;
         for (Film film : panier) {
             System.out.println(index++ + ". " + film.getTitre() + " - " + film.getPrix() + "€");
         }
- 
+
         ArrayList<Film> filmsAchetes = new ArrayList<>();
-        String input;
-        System.out.println("Entrez les num�ros des films que vous souhaitez acheter (s�par�s par des espaces) :");
-        input = scanner.nextLine();
+        System.out.println("Entrez les numéros des films que vous souhaitez acheter (séparés par des espaces) :");
+        String input = scanner.nextLine();
         String[] choixFilms = input.split(" ");
- 
+
         for (String choix : choixFilms) {
             int filmIndex = Integer.parseInt(choix) - 1;
             if (filmIndex >= 0 && filmIndex < panier.size()) {
                 filmsAchetes.add(panier.get(filmIndex));
             } else {
-                System.out.println("Numero invalide : " + (filmIndex + 1));
+                System.out.println("Numéro invalide : " + (filmIndex + 1));
             }
         }
- 
+
         if (filmsAchetes.isEmpty()) {
-            System.out.println("Aucun film valide selectionne.");
+            System.out.println("Aucun film valide sélectionné.");
             return;
         }
- 
-        // Création de la commande
-        Commande nouvelleCommande = new Commande(new Date(), this); // date et montant seront mis à jour
+
+        Commande nouvelleCommande = new Commande(new Date(), this);
         for (Film film : filmsAchetes) {
             nouvelleCommande.ajouter_Film(film);
         }
- 
-        // Calcul du montant total de la commande
+
         float total = 0;
         for (Film film : filmsAchetes) {
             total += film.getPrix();
         }
-        
+
         if (this.isAbonne()){
-        	total = total * 0.8f;
+            total = total * 0.8f;  // 20% de réduction pour les abonnés
         }
-        
+
         nouvelleCommande.setMontant(total);
- 
-        // Ajout de la commande aux achats
         this.ajouter_achat(nouvelleCommande);
-        if (this.isAbonne()) {
-        	System.out.println("Vous êtes abonné vous bénéficiez de 20% de réduction ! ;-) ");
-        }
-        System.out.println("Commande creee avec succes. Montant total : " + total + "euros");
-        
-        // Retirer les films achetés du panier 
+
+        System.out.println("Commande créée avec succès");
+        System.out.println(nouvelleCommande);
+
         for (Film film : filmsAchetes) {
             this.supprimer_film_panier(film);
         }
     }
-
+    
+    public void ajouter_achat(Commande c) {
+    	this.achats.add(c);
+    } 
+    
+    public void supprimer_achat(Commande c) {
+    	this.achats.remove(c);
+    }
+    
+    public void consulter_historique_achats() {
+    	System.out.println("Historique des achats pour " + this.prenom + " " + this.nom + " :");
+    	for (Commande c : this.achats) {
+    		System.out.println(c + "\n");
+    	}
+    }
     
     public void consulter_historique_achats_filtres() {
         if (achats.isEmpty()) {
-            System.out.println("Aucun achat enregistr� pour " + this.prenom + " " + this.nom);
+            System.out.println("Aucun achat enregistré pour " + this.prenom + " " + this.nom);
             return;
         }
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choisissez le mode de tri pour l'historique des achats :");
         System.out.println("1. Date croissante");
-        System.out.println("2. Date d�croissante");
+        System.out.println("2. Date décroissante");
         System.out.println("3. Montant croissant");
-        System.out.println("4. Montant d�croissant");
+        System.out.println("4. Montant décroissant");
         System.out.print("Entrez votre choix (1, 2, 3 ou 4) : ");
         int choix = scanner.nextInt();
 
-        // Tri des commandes selon le choix de l'utilisateur
         switch (choix) {
             case 1:
                 Collections.sort(achats, Comparator.comparing(Commande::getDate));
@@ -216,7 +242,7 @@ public class Utilisateur extends Personne {
                 Collections.sort(achats, Comparator.comparing(Commande::getMontant).reversed());
                 break;
             default:
-                System.out.println("Choix invalide. Affichage par d�faut (date croissante).");
+                System.out.println("Choix invalide. Affichage par défaut (date croissante).");
                 Collections.sort(achats, Comparator.comparing(Commande::getDate));
                 break;
         }
@@ -227,24 +253,25 @@ public class Utilisateur extends Personne {
         }
     }
     
+    public void ajouter_note(Note note) {
+    	this.notes.add(note);
+    }
+    
+    public void supprimer_note(Note note) {
+    	this.notes.remove(note);
+    }
+    
     public void afficherVitrine() {
         // Lire tous les films et les films déjà achetés
-        ArrayList<Film> tousLesFilms = Data.lireFilms("src/data/films.csv");
-        ArrayList<Film> filmsAchetes = Data.lireFilmsUtilisateur(this.id,"src/data/commandes.csv","src/data/films.csv");
-
-        System.out.println("Films déjà achetés par l'utilisateur:");
-        for (Film film : filmsAchetes) {
-            System.out.println(film.getTitre());
-        }
-
+        ArrayList<Film> tousLesFilms = Data.lireFilms();
+        ArrayList<Film> filmsAchetes = Data.lireFilmsUtilisateur(this.id);
+        
         // Déterminer le type de film le plus fréquent
         HashMap<Type_Film, Integer> typeCompteur = new HashMap<>();
         for (Film film : filmsAchetes) {
             typeCompteur.put(film.getType(), typeCompteur.getOrDefault(film.getType(), 0) + 1);
         }
         Type_Film typeMajoritaire = Collections.max(typeCompteur.entrySet(), Map.Entry.comparingByValue()).getKey();
-
-        System.out.println("Type majoritaire: " + typeMajoritaire);
 
         // Sélectionner les films pour la vitrine
         ArrayList<Film> selectionVitrine = new ArrayList<>();
@@ -268,49 +295,39 @@ public class Utilisateur extends Personne {
             }
             if (selectionVitrine.size() == 10) break;
         }
+            
+        String titre = "Films Sélectionnés pour la Vitrine";
+        int totalWidth = 73; // Largeur totale du tableau, ajustez selon votre mise en page
+        int paddingLength = (totalWidth - titre.length()) / 2;
+        String padding = " ".repeat(paddingLength);
+        System.out.println(" ");
+        System.out.println(padding + titre);
+        System.out.println("*".repeat(totalWidth));
+        System.out.println(String.format("| %-30s | %-15s | %-6s | %-6s |", "Titre", "Type", "Année", "Prix"));
+        System.out.println("-".repeat(totalWidth));
 
-        // Afficher les films sélectionnés pour la vitrine
-        System.out.println("Films sélectionnés pour la vitrine:");
+        // Suppose que `selectionVitrine` est déjà rempli avec 10 films
         for (Film film : selectionVitrine) {
-            System.out.println(film.getTitre() + " - Type: " + film.getType());
+            System.out.printf("| %-30s | %-15s | %-6d | %-6.2f€ |\n",
+                film.getTitre(), film.getType(), film.getAnnee_prod(), film.getPrix());
         }
-    }
 
-    
-    public void ajouter_achat(Commande c) {
-    	this.achats.add(c);
-    } 
-    public void supprimer_achat(Commande c) {
-    	this.achats.remove(c);
+        System.out.println("-".repeat(totalWidth));
+       
     }
     
-    public void consulter_historique_achats() {
-    	System.out.println("Historique des achats pour " + this.prenom + " " + this.nom + " :");
-    	for (Commande c : this.achats) {
-    		System.out.println(c + "\n");
-    	}
-    }
-        
-    public void ajouter_note(Note note) {
-    	this.notes.add(note);
-    }
-    
-    public void supprimer_note(Note note) {
-    	this.notes.remove(note);
-    }
 
     
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Nom: ").append(this.nom).append("\n");
-        sb.append("Prenom: ").append(this.prenom).append("\n");
-        sb.append("Mail : ").append(this.mail).append("\n");
-        sb.append("Date de naissance : ").append(this.date_naissance).append("\n");
-        sb.append("Id : ").append(this.id).append("\n");
+        sb.append("Prénom: ").append(this.prenom).append("\n");
+        sb.append("Mail: ").append(this.mail).append("\n");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        sb.append("Date de naissance: ").append(formatter.format(this.date_naissance)).append("\n");
+        sb.append("ID: ").append(this.id).append("\n");
+        sb.append("Abonné: ").append(this.abonne ? "Oui" : "Non").append("\n");
         return sb.toString();
     }
-    
-    
-    
 }

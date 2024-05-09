@@ -1,11 +1,11 @@
 package metier;
 
 public class Personne {
-    protected String nom;
+    protected String nom; // attributs en protected pour qu'ils soient utilisés que par les classe filles
     protected String prenom;
     protected String mail;
     protected String adresse;
-    protected String id; // je change id en protected car en private je ne peux pas l'utiliser dans utilisateur
+    protected String id; 
 	protected String mdp;
 	
 	
