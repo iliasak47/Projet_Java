@@ -1,6 +1,6 @@
 Code,Titre,AnneeProd,ComActif,Description,Prix,NoteMoy,ProducteurNom,ProducteurPrenom,Type
-FILM000,Ilias à Cauchy,2007,False,C'est l'histoire d'un raciste,18.4,5.2,Quentin,Tarantino,ScienceFiction
-FILM001,Ilias jjb adventures,1994,True,Ilias IA clé de bras,29.12,6.3,Steven,Spielberg,Thriller
+FILM000,Ilias ï¿½ Cauchy,2007,False,C'est l'histoire d'un raciste,18.4,5.2,Quentin,Tarantino,ScienceFiction
+FILM001,Ilias jjb adventures,1994,True,Ilias IA clï¿½ de bras,29.12,6.3,Steven,Spielberg,Thriller
 FILM002,Titre02,1993,True,Description of X2,24.28,8.6,David,Fincher,Action
 FILM003,Titre03,2018,False,Description of X3,48.91,6.5,Ridley,Scott,Action
 FILM004,Titre04,1999,True,Description of X4,48.4,6,Wes,Anderson,Action

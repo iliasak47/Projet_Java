@@ -16,11 +16,11 @@ import java.util.Date;
 
 
 public class Data {
-    private static final String CHEMIN_FICHIERS_FILMS = "Projet_Java/src/data/films.csv";
-    private static final String CHEMIN_FICHIERS_UTILISATEURS = "Projet_Java/src/data/utilisateurs.csv";
-    private static final String CHEMIN_FICHIERS_ADMINISTRATEUR = "Projet_Java/src/data/administrateurs.csv";
-    private static final String CHEMIN_FICHIERS_COMMANDES = "Projet_Java/src/data/commandes.csv";
-    private static final String CHEMIN_FICHIERS_COMMENTAIRES = "Projet_Java/src/data/commentaires.csv";
+    private static final String CHEMIN_FICHIERS_FILMS = "src/data/films.csv";
+    private static final String CHEMIN_FICHIERS_UTILISATEURS = "src/data/utilisateurs.csv";
+    private static final String CHEMIN_FICHIERS_ADMINISTRATEUR = "src/data/administrateurs.csv";
+    private static final String CHEMIN_FICHIERS_COMMANDES = "src/data/commandes.csv";
+    private static final String CHEMIN_FICHIERS_COMMENTAIRES = "src/data/commentaires.csv";
 
     public static Map<String, Film> filmsCache = new HashMap<>(); // Cache pour stocker les films
     public static Map<String, Utilisateur> utilisateursCache = new HashMap<>();
@@ -31,19 +31,19 @@ public class Data {
     // ---------------------- FILMS ----------------------
    
     public static Film obtenirFilmParNom(String filmNom) {
-        // Vérifiez si le titre est présent dans le cache titresCache
+        // Vï¿½rifiez si le titre est prï¿½sent dans le cache titresCache
         String codeFilm = titresCache.get(filmNom.trim());
         if (codeFilm != null) {
-            return filmsCache.get(codeFilm);  // Récupérez le film à partir du cache des codes
+            return filmsCache.get(codeFilm);  // Rï¿½cupï¿½rez le film ï¿½ partir du cache des codes
         } else {
-            System.out.println("Aucun film trouvé avec le titre : " + filmNom);
+            System.out.println("Aucun film trouvï¿½ avec le titre : " + filmNom);
             return null;
         }
     }
     
     public static Film obtenirFilmParId(String filmId) {
         if (filmsCache.containsKey(filmId)) {
-            return filmsCache.get(filmId); // Retourne le film du cache s'il existe déjà
+            return filmsCache.get(filmId); // Retourne le film du cache s'il existe dï¿½jï¿½
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader(CHEMIN_FICHIERS_FILMS))) {
@@ -59,7 +59,7 @@ public class Data {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null; // Si le film n'est pas trouvé ou en cas d'erreur
+        return null; // Si le film n'est pas trouvï¿½ ou en cas d'erreur
     }
 
     private static Film creerFilmDepuisDonnees(String[] filmData) {
@@ -76,7 +76,7 @@ public class Data {
 
         Producteur producteur = new Producteur(producteurNom, producteurPrenom);
         Film film = new Film(code, titre, anneeProd, comActif, description, prix, producteur, type);
-        Note note = new Note(noteMoy, film, null); // sert à ajouter la note au film, pas besoin d'un utilisateur
+        Note note = new Note(noteMoy, film, null); // sert ï¿½ ajouter la note au film, pas besoin d'un utilisateur
         film.ajouter_note(note);
         return film;
     }
@@ -86,13 +86,13 @@ public class Data {
 
         try (BufferedReader br = new BufferedReader(new FileReader(CHEMIN_FICHIERS_FILMS))) {
             String ligne;
-            // Sauter l'en-tête du fichier CSV
+            // Sauter l'en-tï¿½te du fichier CSV
             br.readLine();
 
             while ((ligne = br.readLine()) != null) {
                 String[] detailsFilm = ligne.split(",");
-                // Créer un nouveau film avec les détails et l'ajouter à la liste
-                // Assurez-vous que l'ordre et le type des données correspondent à ceux attendus par le constructeur de votre classe Film
+                // Crï¿½er un nouveau film avec les dï¿½tails et l'ajouter ï¿½ la liste
+                // Assurez-vous que l'ordre et le type des donnï¿½es correspondent ï¿½ ceux attendus par le constructeur de votre classe Film
                 Film film = new Film(
                     detailsFilm[0], // code
                     detailsFilm[1], // titre
@@ -115,7 +115,7 @@ public class Data {
 
     public static ArrayList<Film> lireFilmsUtilisateur(String idUtilisateur) {
         ArrayList<Film> filmsUtilisateur = new ArrayList<>();
-        Set<String> codesFilms = new HashSet<>(); // Pour éviter les doublons
+        Set<String> codesFilms = new HashSet<>(); // Pour ï¿½viter les doublons
 
         // Lire les commandes et accumuler les codes des films
         try (BufferedReader br = new BufferedReader(new FileReader(CHEMIN_FICHIERS_COMMANDES))) {
@@ -133,14 +133,14 @@ public class Data {
             return filmsUtilisateur; // Retourne la liste vide en cas d'erreur
         }
 
-        // Lire les films et ajouter ceux qui ont été achetés par l'utilisateur
+        // Lire les films et ajouter ceux qui ont ï¿½tï¿½ achetï¿½s par l'utilisateur
         try (BufferedReader brFilms = new BufferedReader(new FileReader(CHEMIN_FICHIERS_FILMS))) {
             String lineFilm;
 
             while ((lineFilm = brFilms.readLine()) != null) {
                 String[] filmData = lineFilm.split(",");
                 if (codesFilms.contains(filmData[0].trim())) {
-                    // Création de l'objet Film en supposant un constructeur avec ces paramètres
+                    // Crï¿½ation de l'objet Film en supposant un constructeur avec ces paramï¿½tres
                     Film film = new Film(
                             filmData[0].trim(), // code
                             filmData[1].trim(), // titre
@@ -165,7 +165,7 @@ public class Data {
     public static void chargerTousLesFilms() {
         try (BufferedReader br = new BufferedReader(new FileReader(CHEMIN_FICHIERS_FILMS))) {
             String ligne;
-            br.readLine();  // Ignorer l'en-tête
+            br.readLine();  // Ignorer l'en-tï¿½te
             while ((ligne = br.readLine()) != null) {
                 String[] detailsFilm = ligne.split(",");
                 Film film = creerFilmDepuisDonnees(detailsFilm);
@@ -182,7 +182,7 @@ public class Data {
     
     private static Utilisateur creerUtilisateurDepuisDonnees(String[] utilisateurData) {
         if (utilisateurData.length < 9) {
-            System.out.println("Données d'utilisateur incomplètes : " + Arrays.toString(utilisateurData));
+            System.out.println("Donnï¿½es d'utilisateur incomplï¿½tes : " + Arrays.toString(utilisateurData));
             return null;
         }
 
@@ -234,7 +234,7 @@ public class Data {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-        return null; // Si l'utilisateur n'est pas trouvé ou en cas d'erreur
+        return null; // Si l'utilisateur n'est pas trouvï¿½ ou en cas d'erreur
     }
     
     public static Utilisateur obtenirUtilisateurParIdetMdp(String id, String mdp) {
@@ -253,7 +253,7 @@ public class Data {
                 }
             }
         } catch (IOException | ParseException e) {
-            System.out.println("Erreur lors de la vérification des identifiants: " + e.getMessage());
+            System.out.println("Erreur lors de la vï¿½rification des identifiants: " + e.getMessage());
         }
         return null;
     }
@@ -261,7 +261,7 @@ public class Data {
     public static void chargerTousLesUtilisateurs() {
         try (BufferedReader br = new BufferedReader(new FileReader(CHEMIN_FICHIERS_UTILISATEURS))) {
             String ligne;
-            br.readLine(); // Ignorer l'en-tête
+            br.readLine(); // Ignorer l'en-tï¿½te
             while ((ligne = br.readLine()) != null) {
                 String[] detailsUtilisateur = ligne.split(",");
                 if (detailsUtilisateur.length >= 9) {
@@ -287,7 +287,7 @@ public class Data {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(";");
                 if (data.length < 5) {
-                    System.out.println("Données insuffisantes dans la ligne: " + line);
+                    System.out.println("Donnï¿½es insuffisantes dans la ligne: " + line);
                     continue;
                 }
                 if (data[1].trim().equals(idUtilisateur)) {
@@ -297,7 +297,7 @@ public class Data {
                     
                     Utilisateur utilisateur = obtenirUtilisateurParId(idUtilisateur);
                     if (utilisateur == null) {
-                        System.out.println("Utilisateur non trouvé pour l'ID: " + idUtilisateur);
+                        System.out.println("Utilisateur non trouvï¿½ pour l'ID: " + idUtilisateur);
                         continue;
                     }
                     Commande commande = new Commande(date, utilisateur);
@@ -317,7 +317,7 @@ public class Data {
             System.out.println("Erreur de parsing de date");
             e.printStackTrace();
         } catch (NumberFormatException e) {
-            System.out.println("Erreur de format numérique");
+            System.out.println("Erreur de format numï¿½rique");
             e.printStackTrace();
         } catch (IOException e) {
             System.out.println("Erreur de lecture du fichier");
@@ -335,21 +335,21 @@ public class Data {
             Utilisateur utilisateur = utilisateursCache.get(data[1]); // Obtient l'utilisateur correspondant
             
             if (utilisateur == null) {
-                System.out.println("Utilisateur non trouvé pour la commande avec ID: " + data[1]);
-                return null; // Retourne null si aucun utilisateur correspondant n'est trouvé
+                System.out.println("Utilisateur non trouvï¿½ pour la commande avec ID: " + data[1]);
+                return null; // Retourne null si aucun utilisateur correspondant n'est trouvï¿½
             }
 
             Commande commande = new Commande(date, utilisateur);
             commande.setMontant(montant);
 
-            // Parcourir les IDs de films et les ajouter à la commande si disponibles
+            // Parcourir les IDs de films et les ajouter ï¿½ la commande si disponibles
             String[] filmIds = data[4].split("\\|");
             for (String filmId : filmIds) {
                 Film film = filmsCache.get(filmId.trim());
                 if (film != null) {
                     commande.ajouter_Film(film);
                 } else {
-                    System.out.println("Film non trouvé pour ID: " + filmId + " lors de la création de la commande.");
+                    System.out.println("Film non trouvï¿½ pour ID: " + filmId + " lors de la crï¿½ation de la commande.");
                 }
             }
 
@@ -363,7 +363,7 @@ public class Data {
             e.printStackTrace();
             return null;
         } catch (Exception e) {
-            System.out.println("Erreur inattendue lors de la création de la commande: " + Arrays.toString(data));
+            System.out.println("Erreur inattendue lors de la crï¿½ation de la commande: " + Arrays.toString(data));
             e.printStackTrace();
             return null;
         }
@@ -372,7 +372,7 @@ public class Data {
     public static void chargerToutesLesCommandes() {
         try (BufferedReader br = new BufferedReader(new FileReader(CHEMIN_FICHIERS_COMMANDES))) {
             String ligne;
-            br.readLine(); // Ignorer l'en-tête
+            br.readLine(); // Ignorer l'en-tï¿½te
             while ((ligne = br.readLine()) != null) {
                 String[] detailsCommande = ligne.split(";");
                 if (detailsCommande.length > 4) {
@@ -397,11 +397,11 @@ public class Data {
 
         try (BufferedReader br = new BufferedReader(new FileReader(CHEMIN_FICHIERS_COMMENTAIRES))) {
             String line;
-            br.readLine(); // Ignorer l'en-tête
+            br.readLine(); // Ignorer l'en-tï¿½te
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length < 5) {
-                    System.out.println("Données insuffisantes dans la ligne: " + line);
+                    System.out.println("Donnï¿½es insuffisantes dans la ligne: " + line);
                     continue;
                 }
                 if (data[3].trim().equals(idUtilisateur)) {
@@ -409,7 +409,7 @@ public class Data {
                     Utilisateur utilisateur = utilisateursCache.get(idUtilisateur);
                     Film film = filmsCache.get(data[4].trim());
                     if (utilisateur == null || film == null) {
-                        System.out.println("Utilisateur ou film non trouvé pour le commentaire.");
+                        System.out.println("Utilisateur ou film non trouvï¿½ pour le commentaire.");
                         continue;
                     }
                     Commentaire commentaire = new Commentaire(data[1], date, utilisateur, film);
@@ -433,11 +433,11 @@ public class Data {
 
         try (BufferedReader br = new BufferedReader(new FileReader(CHEMIN_FICHIERS_COMMENTAIRES))) {
             String line;
-            br.readLine(); // Ignorer l'en-tête
+            br.readLine(); // Ignorer l'en-tï¿½te
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length < 5) {
-                    System.out.println("Données insuffisantes dans la ligne: " + line);
+                    System.out.println("Donnï¿½es insuffisantes dans la ligne: " + line);
                     continue;
                 }
                 if (data[4].trim().equals(idFilm)) {
@@ -445,7 +445,7 @@ public class Data {
                     Utilisateur utilisateur = utilisateursCache.get(data[3].trim());
                     Film film = filmsCache.get(idFilm);
                     if (utilisateur == null || film == null) {
-                        System.out.println("Utilisateur ou film non trouvé pour le commentaire.");
+                        System.out.println("Utilisateur ou film non trouvï¿½ pour le commentaire.");
                         continue;
                     }
                     Commentaire commentaire = new Commentaire(data[1], date, utilisateur, film);
@@ -471,7 +471,7 @@ public class Data {
             Film film = filmsCache.get(data[4].trim());
             
             if (utilisateur == null || film == null) {
-                System.out.println("Utilisateur ou film non trouvé pour le commentaire.");
+                System.out.println("Utilisateur ou film non trouvï¿½ pour le commentaire.");
                 return null;
             }
 
@@ -482,7 +482,7 @@ public class Data {
             e.printStackTrace();
             return null;
         } catch (Exception e) {
-            System.out.println("Erreur inattendue lors de la création du commentaire: " + Arrays.toString(data));
+            System.out.println("Erreur inattendue lors de la crï¿½ation du commentaire: " + Arrays.toString(data));
             e.printStackTrace();
             return null;
         }
@@ -491,7 +491,7 @@ public class Data {
     public static void chargerTousLesCommentaires() {
         try (BufferedReader br = new BufferedReader(new FileReader(CHEMIN_FICHIERS_COMMENTAIRES))) {
             String ligne;
-            br.readLine(); // Ignorer l'en-tête
+            br.readLine(); // Ignorer l'en-tï¿½te
             while ((ligne = br.readLine()) != null) {
                 String[] detailsCommentaire = ligne.split(",");
                 if (detailsCommentaire.length > 4) {
@@ -524,7 +524,7 @@ public class Data {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Erreur lors de la vérification des identifiants: " + e.getMessage());
+            System.out.println("Erreur lors de la vï¿½rification des identifiants: " + e.getMessage());
         }
         return null;
     }

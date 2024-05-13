@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 
 public class Administrateur extends Personne {
-	private static final String CHEMIN_FICHIERS_FILMS = "Projet_Java/src/data/films.csv";
-    private static final String CHEMIN_FICHIERS_UTILISATEURS = "Projet_Java/src/data/utilisateurs.csv";
-    private static final String CHEMIN_FICHIERS_COMMANDES = "Projet_Java/src/data/commandes.csv";
+	private static final String CHEMIN_FICHIERS_FILMS = "src/data/films.csv";
+    private static final String CHEMIN_FICHIERS_UTILISATEURS = "src/data/utilisateurs.csv";
+    private static final String CHEMIN_FICHIERS_COMMANDES = "src/data/commandes.csv";
 	
     Scanner scanner = new Scanner(System.in);
 
@@ -27,11 +27,11 @@ public class Administrateur extends Personne {
         System.out.print("Entrez le titre du film: ");
         String titre = scanner.nextLine();
         
-        System.out.print("Entrez l'année de production du film: ");
+        System.out.print("Entrez l'annï¿½e de production du film: ");
         int annee_prod = scanner.nextInt();
         scanner.nextLine();  // Consume the remaining newline
         
-        System.out.print("Les commentaires sont-ils activés pour ce film? (oui/non): ");
+        System.out.print("Les commentaires sont-ils activï¿½s pour ce film? (oui/non): ");
         boolean com_actif = scanner.nextLine().equalsIgnoreCase("oui");
         
         System.out.print("Entrez la description du film: ");
@@ -45,7 +45,7 @@ public class Administrateur extends Personne {
         System.out.print("Nom du producteur: ");
         String nomProd = scanner.nextLine();
         
-        System.out.print("Prénom du producteur: ");
+        System.out.print("Prï¿½nom du producteur: ");
         String prenomProd = scanner.nextLine();
         
         Producteur producteur = new Producteur(nomProd, prenomProd);
@@ -76,24 +76,26 @@ public class Administrateur extends Personne {
                 String.valueOf(film.getAnnee_prod()),
                 String.valueOf(film.isCom_actif()),
                 film.getDescription(),
-                String.format(Locale.US, "%.2f", film.getPrix()), // convertit string en float avec un point pour le décimale
+                String.format(Locale.US, "%.2f", film.getPrix()), // convertit string en float avec un point pour le dï¿½cimale
                 String.format(Locale.US, "%.1f", film.getNote_moy()),
                 film.getProducteur().getNom(),
                 film.getProducteur().getPrenom(),
                 film.getType().toString()
             );
 
-            // écriture dans le fichier CSV
+            // ï¿½criture dans le fichier CSV
             out.println(line);
             
 
-            // Mise à jour du Cache
+            // Mise ï¿½ jour du Cache
             Data.filmsCache.put(film.getCode(), film);
+            Data.titresCache.put(film.getTitre(), film.getCode());
+            
 
-            System.out.println("Le film a été ajouté avec succès.");
+            System.out.println("Le film a ï¿½tï¿½ ajoutï¿½ avec succï¿½s.");
 
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de l'écriture dans le fichier.");
+            System.out.println("Une erreur est survenue lors de l'ï¿½criture dans le fichier.");
             e.printStackTrace();
         }
     }
@@ -103,7 +105,7 @@ public class Administrateur extends Personne {
         File inputFile = new File(cheminFichierFilms);
         File tempFile = new File(inputFile.getAbsolutePath() + ".tmp");
 
-        System.out.println("Début de la suppression du film...");
+        System.out.println("Dï¿½but de la suppression du film...");
 
         if (!inputFile.exists()) {
             System.out.println("Le fichier n'existe pas : " + cheminFichierFilms);
@@ -121,23 +123,23 @@ public class Administrateur extends Personne {
                 String trimmedLine = currentLine.trim();
                 String[] data = trimmedLine.split(",");
                 if (data.length < 2) {
-                    System.out.println("Ligne mal formatée ou incorrecte dans le fichier CSV: " + trimmedLine);
+                    System.out.println("Ligne mal formatï¿½e ou incorrecte dans le fichier CSV: " + trimmedLine);
                     continue;
                 }
                 if (data[0].equals(film.getCode())) {
                     found = true;
-                    System.out.println("Film trouvé, suppression : " + trimmedLine);
+                    System.out.println("Film trouvï¿½, suppression : " + trimmedLine);
                     continue;
                 }
                 writer.write(currentLine + System.getProperty("line.separator"));
             }
 
             if (!found) {
-                System.out.println("Film avec le code " + film.getCode() + " n'a pas été trouvé dans le fichier.");
+                System.out.println("Film avec le code " + film.getCode() + " n'a pas ï¿½tï¿½ trouvï¿½ dans le fichier.");
             }
 
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de l'accès ou de la modification du fichier.");
+            System.out.println("Une erreur est survenue lors de l'accï¿½s ou de la modification du fichier.");
             e.printStackTrace();
         } finally {
             try {
@@ -145,8 +147,9 @@ public class Administrateur extends Personne {
                     if (!tempFile.renameTo(inputFile)) {
                         System.out.println("Impossible de renommer le fichier temporaire.");
                     } else {
-                        Data.filmsCache.remove(film.getCode()); // Mise à jour du cache
-                        System.out.println("Le film a été supprimé avec succès.");
+                        Data.filmsCache.remove(film.getCode()); // Mise ï¿½ jour du cache
+                        Data.titresCache.remove(film.getTitre());
+                        System.out.println("Le film a ï¿½tï¿½ supprimï¿½ avec succï¿½s.");
                     }
                 } else {
                     System.out.println("Impossible de supprimer le fichier original.");
@@ -170,11 +173,11 @@ public class Administrateur extends Personne {
         System.out.println("Que souhaitez-vous modifier ?");
         System.out.println("1. Titre");
         System.out.println("2. Description");
-        System.out.println("3. Année de production");
+        System.out.println("3. Annï¿½e de production");
         System.out.println("4. Prix");
         System.out.print("Entrez votre choix (1-4): ");
         int choix = scanner.nextInt();
-        scanner.nextLine(); // consomme la ligne restante après un nextInt()
+        scanner.nextLine(); // consomme la ligne restante aprï¿½s un nextInt()
 
         switch (choix) {
             case 1:
@@ -188,7 +191,7 @@ public class Administrateur extends Personne {
                 film.setDescription(nouvelleDescription);
                 break;
             case 3:
-                System.out.print("Entrez la nouvelle année de production : ");
+                System.out.print("Entrez la nouvelle annï¿½e de production : ");
                 int nouvelleAnneeProd = scanner.nextInt();
                 film.setAnnee_prod(nouvelleAnneeProd);
                 break;
@@ -202,11 +205,11 @@ public class Administrateur extends Personne {
                 break;
         }
 
-        System.out.println("Le film a été mis à jour avec succès.");
-        // Afficher les informations mises à jour du film
+        System.out.println("Le film a ï¿½tï¿½ mis ï¿½ jour avec succï¿½s.");
+        // Afficher les informations mises ï¿½ jour du film
         System.out.println(film);
         
-        // Mise à jour du cache
+        // Mise ï¿½ jour du cache
         Data.filmsCache.put(film.getCode(), film);
         Data.titresCache.put(film.getTitre(), film.getCode());
     }
@@ -215,7 +218,7 @@ public class Administrateur extends Personne {
         System.out.print("Entrez le nom de l'utilisateur : ");
         String nom = scanner.nextLine();
 
-        System.out.print("Entrez le prénom de l'utilisateur : ");
+        System.out.print("Entrez le prï¿½nom de l'utilisateur : ");
         String prenom = scanner.nextLine();
 
         System.out.print("Entrez le mail de l'utilisateur : ");
@@ -237,10 +240,10 @@ public class Administrateur extends Personne {
             date_naissance = sdf.parse(scanner.nextLine());
         } catch (Exception e) {
             System.out.println("Format de date invalide. Utilisez le format jj/mm/aaaa.");
-            return null;  // Sortie anticipée si la date est invalide
+            return null;  // Sortie anticipï¿½e si la date est invalide
         }
 
-        System.out.print("Entrez la phrase secrète de l'utilisateur : ");
+        System.out.print("Entrez la phrase secrï¿½te de l'utilisateur : ");
         String phrase_secrete = scanner.nextLine();
 
         Utilisateur nouvelUtilisateur = new Utilisateur(nom, prenom, mail, adresse, id, mdp, date_naissance, phrase_secrete);
@@ -258,7 +261,7 @@ public class Administrateur extends Personne {
         	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String formattedDate = sdf.format(utilisateur.getDate_naissance()); // Formatter la date de naissance
 
-            // Formatage des données de l'utilisateur pour le CSV
+            // Formatage des donnï¿½es de l'utilisateur pour le CSV
             String line = String.join(",",
                 utilisateur.getNom(),
                 utilisateur.getPrenom(),
@@ -266,19 +269,19 @@ public class Administrateur extends Personne {
                 utilisateur.getAdresse(),
                 utilisateur.getId(),
                 utilisateur.getMdp(),
-                formattedDate, // Utilisation de la date formatée
+                formattedDate, // Utilisation de la date formatï¿½e
                 utilisateur.getPhrase_secrete(),
                 String.valueOf(utilisateur.isAbonne())
             );
 
-            // écriture dans le fichier CSV
+            // ï¿½criture dans le fichier CSV
             out.println(line);
             
             Data.utilisateursCache.put(utilisateur.getId(), utilisateur);
-            System.out.println("L'utilisateur a été ajouté avec succès.");
+            System.out.println("L'utilisateur a ï¿½tï¿½ ajoutï¿½ avec succï¿½s.");
 
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de l'écriture dans le fichier.");
+            System.out.println("Une erreur est survenue lors de l'ï¿½criture dans le fichier.");
             e.printStackTrace();
         }
     }
@@ -288,7 +291,7 @@ public class Administrateur extends Personne {
         File inputFile = new File(cheminFichierUtilisateurs);
         File tempFile = new File(inputFile.getAbsolutePath() + ".tmp");
 
-        System.out.println("Début de la suppression de l'utilisateur...");
+        System.out.println("Dï¿½but de la suppression de l'utilisateur...");
 
         if (!inputFile.exists()) {
             System.out.println("Le fichier n'existe pas : " + cheminFichierUtilisateurs);
@@ -307,14 +310,14 @@ public class Administrateur extends Personne {
                 String[] userDetails = trimmedLine.split(",");
                 if (userDetails[4].equals(utilisateur.getId())) {
                     found = true;
-                    System.out.println("Utilisateur trouvé, suppression : " + trimmedLine);
+                    System.out.println("Utilisateur trouvï¿½, suppression : " + trimmedLine);
                     continue;
                 }
                 writer.write(currentLine + System.getProperty("line.separator"));
             }
 
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de l'accès ou de la modification du fichier.");
+            System.out.println("Une erreur est survenue lors de l'accï¿½s ou de la modification du fichier.");
             e.printStackTrace();
         } finally {
             try {
@@ -322,8 +325,8 @@ public class Administrateur extends Personne {
                     if (!tempFile.renameTo(inputFile)) {
                         System.out.println("Impossible de renommer le fichier temporaire.");
                     } else {
-                        Data.utilisateursCache.remove(utilisateur.getId()); // Mise à jour du cache
-                        System.out.println("L'utilisateur a été supprimé avec succès.");
+                        Data.utilisateursCache.remove(utilisateur.getId()); // Mise ï¿½ jour du cache
+                        System.out.println("L'utilisateur a ï¿½tï¿½ supprimï¿½ avec succï¿½s.");
                     }
                 } else {
                     System.out.println("Impossible de supprimer le fichier original.");
@@ -340,21 +343,21 @@ public class Administrateur extends Personne {
     	    
     public void activer_com(Film film) {	
     	if (film.isCom_actif()) {
-    		System.out.println("Les commentaires sont déjà activés pour ce film");
+    		System.out.println("Les commentaires sont dï¿½jï¿½ activï¿½s pour ce film");
     	}
     	else {
     		film.setCom_actif(true);
-    		System.out.println("Les commentaires sont désormais activés pour ce film");
+    		System.out.println("Les commentaires sont dï¿½sormais activï¿½s pour ce film");
     	}
     }
     
     public void desactiver_com(Film film) {
     	if (film.isCom_actif()) {
     		film.setCom_actif(false);
-    		System.out.println("Les commentaires sont désormais désactivés pour ce film");
+    		System.out.println("Les commentaires sont dï¿½sormais dï¿½sactivï¿½s pour ce film");
     	}
     	else {
-    		System.out.println("Les commentaires sont déjà désactivés pour ce film");
+    		System.out.println("Les commentaires sont dï¿½jï¿½ dï¿½sactivï¿½s pour ce film");
     	}
     }
     
@@ -387,8 +390,8 @@ public class Administrateur extends Personne {
         // Affichage formatÃ© des rÃ©sultats
         System.out.println("Statistiques des Utilisateurs:");
         System.out.println("Nombre total d'utilisateurs: " + nombreTotal);
-        System.out.println(String.format("Nombre d'utilisateurs abonnés: %d (%.2f%%)", nombreAbonnes, pourcentageAbonnes));
-        System.out.println(String.format("Nombre d'utilisateurs non abonnés: %d (%.2f%%)", nombreTotal - nombreAbonnes, pourcentageNonAbonnes));
+        System.out.println(String.format("Nombre d'utilisateurs abonnï¿½s: %d (%.2f%%)", nombreAbonnes, pourcentageAbonnes));
+        System.out.println(String.format("Nombre d'utilisateurs non abonnï¿½s: %d (%.2f%%)", nombreTotal - nombreAbonnes, pourcentageNonAbonnes));
     }
     
     public void genererStatistiquesFilms() {
@@ -426,12 +429,12 @@ public class Administrateur extends Personne {
 
                 System.out.println("Statistiques des Films:");
                 System.out.println("Nombre total de films: " + nombreFilms);
-                System.out.println("Prix moyen des films: " + String.format("%.2f", prixMoyen) + "€");
+                System.out.println("Prix moyen des films: " + String.format("%.2f", prixMoyen) + "ï¿½");
                 System.out.println("Note moyenne des films: " + String.format("%.2f", noteMoyenne) + "/10");
-                System.out.println("Répartition des films par type:");
+                System.out.println("Rï¿½partition des films par type:");
                 filmsParType.forEach((type, count) -> System.out.println(type + ": " + count + " film(s)"));
             } else {
-                System.out.println("Aucun film trouvé dans le fichier.");
+                System.out.println("Aucun film trouvï¿½ dans le fichier.");
             }
 
         } catch (IOException e) {
@@ -472,8 +475,8 @@ public class Administrateur extends Personne {
         
         System.out.println("Statistiques des commandes :");
         System.out.println("Nombre total de commandes : " + nombreCommandes);
-        System.out.println("Montant total des commandes : " + totalMontant + "€");
-        System.out.println("Montant moyen par commande : " + moyenneMontant + "€");
+        System.out.println("Montant total des commandes : " + totalMontant + "ï¿½");
+        System.out.println("Montant moyen par commande : " + moyenneMontant + "ï¿½");
     }
 }
 
