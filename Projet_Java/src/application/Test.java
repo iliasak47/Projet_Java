@@ -22,7 +22,7 @@ public class Test {
         Data.chargerTousLesUtilisateurs();
         Data.chargerToutesLesCommandes();
         Data.chargerTousLesCommentaires();
-    	
+    	Data.chargerTousLesActeurs();
     
     	// ----------------MENU-----------------------    	
         

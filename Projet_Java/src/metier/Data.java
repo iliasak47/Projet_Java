@@ -16,11 +16,12 @@ import java.util.Date;
 
 
 public class Data {
-    private static final String CHEMIN_FICHIERS_FILMS = "src/data/films.csv";
-    private static final String CHEMIN_FICHIERS_UTILISATEURS = "src/data/utilisateurs.csv";
-    private static final String CHEMIN_FICHIERS_ADMINISTRATEUR = "src/data/administrateurs.csv";
-    private static final String CHEMIN_FICHIERS_COMMANDES = "src/data/commandes.csv";
-    private static final String CHEMIN_FICHIERS_COMMENTAIRES = "src/data/commentaires.csv";
+    private static final String CHEMIN_FICHIERS_FILMS = "Projet_Java/src/data/films.csv";
+    private static final String CHEMIN_FICHIERS_UTILISATEURS = "Projet_Java/src/data/utilisateurs.csv";
+    private static final String CHEMIN_FICHIERS_ADMINISTRATEUR = "Projet_Java/src/data/administrateurs.csv";
+    private static final String CHEMIN_FICHIERS_COMMANDES = "Projet_Java/src/data/commandes.csv";
+    private static final String CHEMIN_FICHIERS_COMMENTAIRES = "Projet_Java/src/data/commentaires.csv";
+    private static final String CHEMIN_FICHIERS_ACTEURS = "Projet_Java/src/data/acteurs.csv";
 
     public static Map<String, Film> filmsCache = new HashMap<>(); // Cache pour stocker les films
     public static Map<String, Utilisateur> utilisateursCache = new HashMap<>();
@@ -527,7 +528,43 @@ public class Data {
         return null;
     }
     
+    // ---------------------- ACTEURS ----------------------
     
+    private static Acteur creerActeurDepuisDonnees(String[] data) {
+        try {
+            String[] filmsIDs = data[2].split("\\|");
+            Acteur acteur = new Acteur(data[0].trim(), data[1].trim());
+            for (String filmID : filmsIDs) {
+                Film film = filmsCache.get(filmID.trim());
+                if (film != null) {
+                    film.ajouter_acteur(acteur);
+                } else {  
+                    System.out.println("Film non trouvé pour l'acteur: " + Arrays.toString(data));
+                }
+            }
+            return acteur;
+        } catch (Exception e) {
+            System.out.println("Erreur inattendue lors de la création de l'acteur: " + Arrays.toString(data));
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void chargerTousLesActeurs() {
+        try (BufferedReader br = new BufferedReader(new FileReader(CHEMIN_FICHIERS_ACTEURS))) {
+            String ligne;
+            br.readLine(); // Ignorer l'en-tête
+            while ((ligne = br.readLine()) != null) {
+                String[] detailsActeur = ligne.split(",");
+                if (detailsActeur.length > 2) {
+                    creerActeurDepuisDonnees(detailsActeur);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erreur de lecture du fichier des acteurs.");
+            e.printStackTrace();
+        }
+    }
     
     
     

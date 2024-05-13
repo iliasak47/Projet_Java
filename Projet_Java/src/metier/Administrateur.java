@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 
 public class Administrateur extends Personne {
-	private static final String CHEMIN_FICHIERS_FILMS = "src/data/films.csv";
-    private static final String CHEMIN_FICHIERS_UTILISATEURS = "src/data/utilisateurs.csv";
-    private static final String CHEMIN_FICHIERS_COMMANDES = "src/data/commandes.csv";
+	private static final String CHEMIN_FICHIERS_FILMS = "Projet_Java/src/data/films.csv";
+    private static final String CHEMIN_FICHIERS_UTILISATEURS = "Projet_Java/src/data/utilisateurs.csv";
+    private static final String CHEMIN_FICHIERS_COMMANDES = "Projet_Java/src/data/commandes.csv";
 	
     Scanner scanner = new Scanner(System.in);
 
