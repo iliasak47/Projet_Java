@@ -297,7 +297,7 @@ public class Utilisateur extends Personne {
         }
             
         String titre = "Films Sélectionnés pour la Vitrine";
-        int totalWidth = 73; // Largeur totale du tableau, ajustez selon votre mise en page
+        int totalWidth = 73; 
         int paddingLength = (totalWidth - titre.length()) / 2;
         String padding = " ".repeat(paddingLength);
         System.out.println(" ");
@@ -306,7 +306,7 @@ public class Utilisateur extends Personne {
         System.out.println(String.format("| %-30s | %-15s | %-6s | %-6s |", "Titre", "Type", "Année", "Prix"));
         System.out.println("-".repeat(totalWidth));
 
-        // Suppose que `selectionVitrine` est déjà rempli avec 10 films
+        
         for (Film film : selectionVitrine) {
             System.out.printf("| %-30s | %-15s | %-6d | %-6.2f€ |\n",
                 film.getTitre(), film.getType(), film.getAnnee_prod(), film.getPrix());

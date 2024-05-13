@@ -31,7 +31,6 @@ public class Data {
     // ---------------------- FILMS ----------------------
    
     public static Film obtenirFilmParNom(String filmNom) {
-        // V�rifiez si le titre est pr�sent dans le cache titresCache
         String codeFilm = titresCache.get(filmNom.trim());
         if (codeFilm != null) {
             return filmsCache.get(codeFilm);  // R�cup�rez le film � partir du cache des codes
@@ -92,7 +91,6 @@ public class Data {
             while ((ligne = br.readLine()) != null) {
                 String[] detailsFilm = ligne.split(",");
                 // Cr�er un nouveau film avec les d�tails et l'ajouter � la liste
-                // Assurez-vous que l'ordre et le type des donn�es correspondent � ceux attendus par le constructeur de votre classe Film
                 Film film = new Film(
                     detailsFilm[0], // code
                     detailsFilm[1], // titre

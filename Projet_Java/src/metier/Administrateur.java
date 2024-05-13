@@ -63,7 +63,7 @@ public class Administrateur extends Personne {
  
     public void ajouterFilm(Film film) {
         // Chemin vers le fichier films.csv dans le projet
-        String cheminFichierFilms = CHEMIN_FICHIERS_FILMS; // Ajustez ce chemin si n�cessaire
+        String cheminFichierFilms = CHEMIN_FICHIERS_FILMS; 
         
         try (FileWriter fw = new FileWriter(cheminFichierFilms, true);
              BufferedWriter bw = new BufferedWriter(fw);
@@ -156,7 +156,7 @@ public class Administrateur extends Personne {
                 }
             } finally {
                 if (tempFile.exists()) {
-                    tempFile.delete(); // Assurez-vous de supprimer le fichier temporaire
+                    tempFile.delete(); // Suppression du fichier temporaire
                 }
             }
         }
@@ -252,7 +252,7 @@ public class Administrateur extends Personne {
     }
     
     public void ajouterUtilisateur(Utilisateur utilisateur) {
-    	String cheminFichier = CHEMIN_FICHIERS_UTILISATEURS; // Ajustez ce chemin si n�cessaire
+    	String cheminFichier = CHEMIN_FICHIERS_UTILISATEURS; 
         
         try (FileWriter fw = new FileWriter(cheminFichier, true);
              BufferedWriter bw = new BufferedWriter(fw);
@@ -334,7 +334,7 @@ public class Administrateur extends Personne {
             } finally {
                 if (tempFile.exists()) {
                     System.out.println("Suppression du fichier temporaire.");
-                    tempFile.delete(); // Assurez-vous de supprimer le fichier temporaire
+                    tempFile.delete(); //Suppression du fichier temporaire
                 }
             }
         }
@@ -368,7 +368,7 @@ public class Administrateur extends Personne {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
             String ligne;
-            reader.readLine(); // Ignorer les en-têtes si votre fichier en a
+            reader.readLine(); // Pour ignorer les en-têtes de notre fichier
             
             while ((ligne = reader.readLine()) != null) {
                 String[] detailsUtilisateur = ligne.split(",");
@@ -409,8 +409,6 @@ public class Administrateur extends Personne {
 
             while ((ligne = reader.readLine()) != null) {
                 String[] detailsFilm = ligne.split(",");
-                // Supposons que la structure du fichier CSV est la suivante:
-                // code, titre, annee_prod, com_actif, description, prix, note_moy, producteur_nom, producteur_prenom, type_film
                 if (detailsFilm.length > 9) {
                     String type = detailsFilm[9];
                     float prix = Float.parseFloat(detailsFilm[5]);
@@ -444,7 +442,7 @@ public class Administrateur extends Personne {
     }
     
     public void genererStatistiquesCommandes() {
-        String cheminFichierCommandes = CHEMIN_FICHIERS_COMMANDES; // Assurez-vous que ce chemin est correct
+        String cheminFichierCommandes = CHEMIN_FICHIERS_COMMANDES;
         File fichierCommandes = new File(cheminFichierCommandes);
         if (!fichierCommandes.exists()) {
             System.out.println("Le fichier de commandes n'existe pas.");
@@ -456,11 +454,11 @@ public class Administrateur extends Personne {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fichierCommandes))) {
-            String line = reader.readLine(); // Lire l'en-tête si nécessaire, sinon commenter cette ligne
+            String line = reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(";");
                 if (data.length > 1) {
-                    float montant = Float.parseFloat(data[3]); // Assumer que le montant est à l'index 1
+                    float montant = Float.parseFloat(data[3]);
                     totalMontant += montant;
                     nombreCommandes++;
                 }
